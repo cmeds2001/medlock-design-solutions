@@ -1,0 +1,2872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medlock Design Solutions</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; background: #060810; }
+body { background: #060810; color: #F0F4FF; font-family: 'Barlow', sans-serif; overflow-x: hidden; }
+
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: linear-gradient(rgba(0,102,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,102,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none; z-index: 0;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  padding: 16px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(6,8,16,0.97);
+  border-bottom: 1px solid rgba(0,102,255,0.1);
+}
+.logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 3px; color: #F0F4FF; }
+.logo span { color: #0066FF; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { color: #8892B0; text-decoration: none; font-size: 0.75rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s; }
+.nav-links a:hover { color: #0066FF; }
+.nav-cta { background: transparent; border: 1px solid #0066FF; color: #0066FF; padding: 9px 22px; font-family: 'Barlow', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+.nav-cta:hover { background: #0066FF; color: #F0F4FF; }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 48px 80px; position: relative; overflow: hidden; background: #060810;
+}
+.hero-glow { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 70% 50%, rgba(0,102,255,0.12) 0%, transparent 70%); pointer-events: none; }
+.hero-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: #0066FF; margin-bottom: 20px; }
+.hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 9vw, 8rem); line-height: 0.95; letter-spacing: 2px; color: #F0F4FF; margin-bottom: 28px; }
+.hero h1 .accent { color: #0066FF; }
+.hero h1 .outline { -webkit-text-stroke: 1px rgba(240,244,255,0.35); color: transparent; }
+.hero-sub { font-size: 1rem; color: #CCD6F6; max-width: 500px; line-height: 1.75; margin-bottom: 40px; }
+.hero-sub strong { color: #fff; font-weight: 700; }
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+.btn-primary { background: #0066FF; color: #F0F4FF; padding: 15px 36px; font-family: 'Barlow', sans-serif; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: opacity 0.3s; }
+.btn-primary:hover { opacity: 0.85; }
+.btn-ghost { background: transparent; color: #CCD6F6; padding: 15px 36px; font-family: 'Barlow', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; border: 1px solid rgba(136,146,176,0.3); cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s; }
+.btn-ghost:hover { border-color: #0066FF; color: #0066FF; }
+
+/* MARQUEE */
+.marquee-wrap { overflow: hidden; border-top: 1px solid rgba(0,102,255,0.2); border-bottom: 1px solid rgba(0,102,255,0.2); background: rgba(0,102,255,0.04); padding: 14px 0; position: relative; z-index: 1; }
+.marquee { display: flex; animation: marquee 22s linear infinite; white-space: nowrap; }
+.marquee-item { font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 4px; color: #8892B0; padding: 0 32px; text-transform: uppercase; }
+.marquee-item::after { content: '//'; color: #0066FF; margin-left: 32px; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* SECTIONS */
+section { position: relative; z-index: 1; }
+.wrap { padding: 90px 48px; }
+.sec-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: #0066FF; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+.sec-tag::before { content: ''; width: 20px; height: 1px; background: #0066FF; }
+.sec-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 4rem); line-height: 1; letter-spacing: 2px; color: #F0F4FF; margin-bottom: 48px; }
+.sec-title .accent { color: #0066FF; }
+
+/* STATS */
+.stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+.stat-card { padding: 40px 32px; background: #0A0D1A; border: 1px solid rgba(0,102,255,0.15); }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: #0066FF; line-height: 1; margin-bottom: 6px; }
+.stat-lbl { font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #8892B0; }
+
+/* PILLARS */
+.pillars-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+.pillar { padding: 40px 28px; background: #060810; border: 1px solid rgba(0,102,255,0.1); transition: border-color 0.3s; position: relative; overflow: hidden; }
+.pillar::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: #0066FF; transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
+.pillar:hover::before { transform: scaleX(1); }
+.pillar:hover { border-color: rgba(0,102,255,0.35); }
+.pillar-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: rgba(0,102,255,0.12); line-height: 1; margin-bottom: 12px; }
+.pillar-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 1px; color: #F0F4FF; margin-bottom: 12px; }
+.pillar-desc { font-size: 0.88rem; color: #8892B0; line-height: 1.7; }
+
+/* PROCESS */
+.steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 48px; position: relative; }
+.steps-grid::before { content: ''; position: absolute; top: 24px; left: calc(16.66% + 16px); right: calc(16.66% + 16px); height: 1px; background: linear-gradient(90deg, #0066FF, rgba(0,102,255,0.2), #0066FF); }
+.step { padding-top: 64px; position: relative; }
+.step-num { position: absolute; top: 0; left: 0; width: 48px; height: 48px; background: #0066FF; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; color: #F0F4FF; }
+.step-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 1px; color: #F0F4FF; margin-bottom: 10px; }
+.step-desc { font-size: 0.88rem; color: #8892B0; line-height: 1.75; }
+
+/* PRICING */
+.pricing-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; max-width: 860px; }
+.price-card { padding: 48px 40px; background: #060810; border: 1px solid rgba(0,102,255,0.12); transition: border-color 0.3s; position: relative; }
+.price-card:hover { border-color: rgba(0,102,255,0.4); }
+.price-card.featured { border-color: #0066FF; background: linear-gradient(135deg, #060810, rgba(0,102,255,0.06)); }
+.price-card.featured::before { content: 'MOST POPULAR'; position: absolute; top: -1px; right: 28px; background: #0066FF; color: #F0F4FF; font-size: 0.6rem; font-weight: 700; letter-spacing: 2px; padding: 5px 12px; }
+.plan-lbl { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: #0066FF; margin-bottom: 20px; }
+.plan-price { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; line-height: 1; color: #F0F4FF; margin-bottom: 4px; }
+.plan-price span { font-family: 'Barlow', sans-serif; font-size: 0.9rem; color: #8892B0; font-weight: 300; }
+.plan-setup { font-size: 0.82rem; color: #8892B0; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid rgba(0,102,255,0.1); }
+.plan-setup strong { color: #F0F4FF; }
+.plan-features { list-style: none; margin-bottom: 32px; }
+.plan-features li { font-size: 0.88rem; color: #CCD6F6; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: flex; align-items: center; gap: 10px; }
+.plan-features li::before { content: ''; width: 5px; height: 5px; background: #0066FF; flex-shrink: 0; }
+
+/* COMPARISON */
+.comp-table { width: 100%; border-collapse: collapse; max-width: 860px; }
+.comp-table th { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; padding: 18px 20px; text-align: left; border-bottom: 1px solid rgba(0,102,255,0.3); color: #8892B0; }
+.comp-table th:last-child { color: #0066FF; }
+.comp-table td { padding: 16px 20px; font-size: 0.88rem; color: #CCD6F6; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.comp-table td:nth-child(2) { text-decoration: line-through; color: #8892B0; opacity: 0.6; }
+.comp-table td:last-child { color: #0066FF; font-weight: 600; }
+
+/* INDUSTRIES */
+.industries-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.industry-card { background: #060810; border: 1px solid rgba(0,102,255,0.1); transition: border-color 0.3s; overflow: hidden; }
+.industry-card:hover { border-color: rgba(0,102,255,0.35); }
+.industry-icon { height: 120px; background: #0A0D1A; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; border-bottom: 1px solid rgba(0,102,255,0.08); }
+.industry-body { padding: 20px 22px; }
+.industry-tag { font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #0066FF; margin-bottom: 6px; }
+.industry-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 1px; color: #F0F4FF; margin-bottom: 4px; }
+.industry-desc { font-size: 0.78rem; color: #8892B0; }
+
+/* FOUNDING */
+.founding-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,102,255,0.12); border: 1px solid rgba(0,102,255,0.4); color: #0066FF; font-size: 0.65rem; font-weight: 700; letter-spacing: 3px; padding: 7px 16px; margin-bottom: 22px; }
+.founding-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 3.8rem); line-height: 1.02; letter-spacing: 2px; color: #F0F4FF; margin-bottom: 18px; }
+.founding-title .accent { color: #0066FF; }
+.founding-sub { font-size: 0.92rem; color: #8892B0; line-height: 1.8; margin-bottom: 32px; max-width: 560px; }
+.perk-row { display: flex; align-items: flex-start; gap: 18px; padding: 18px 22px; background: #0A0D1A; border: 1px solid rgba(0,102,255,0.2); margin-bottom: 3px; transition: border-color 0.3s; }
+.perk-row:hover { border-color: rgba(0,102,255,0.45); }
+.perk-n { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: #0066FF; line-height: 1; flex-shrink: 0; width: 28px; margin-top: 1px; }
+.perk-t { font-size: 0.88rem; font-weight: 700; color: #F0F4FF; margin-bottom: 3px; }
+.perk-d { font-size: 0.82rem; color: #8892B0; line-height: 1.6; }
+.slots-row { display: flex; gap: 8px; margin: 28px 0 8px; }
+.slot-on { width: 42px; height: 5px; background: #0066FF; }
+.slot-off { width: 42px; height: 5px; border: 1px solid rgba(0,102,255,0.3); }
+.slots-txt { font-size: 0.63rem; font-weight: 700; letter-spacing: 3px; color: #8892B0; margin-bottom: 28px; text-transform: uppercase; }
+
+/* FAQ */
+.faq-list { max-width: 780px; display: flex; flex-direction: column; gap: 2px; }
+.faq-item { background: #060810; border: 1px solid rgba(0,102,255,0.12); overflow: hidden; }
+.faq-item.open { border-color: rgba(0,102,255,0.4); }
+.faq-q { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; cursor: pointer; user-select: none; gap: 16px; }
+.faq-q span { font-size: 0.92rem; font-weight: 600; color: #F0F4FF; }
+.faq-icon { width: 26px; height: 26px; border: 1px solid rgba(0,102,255,0.35); display: flex; align-items: center; justify-content: center; color: #0066FF; font-size: 1.1rem; flex-shrink: 0; transition: transform 0.3s; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; padding: 0 24px; font-size: 0.88rem; color: #8892B0; line-height: 1.8; }
+.faq-item.open .faq-a { max-height: 200px; padding: 0 24px 20px; }
+
+/* CONTACT */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; max-width: 1060px; }
+.contact-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3.5rem); line-height: 1; letter-spacing: 2px; color: #F0F4FF; margin-bottom: 16px; }
+.contact-title .accent { color: #0066FF; }
+.contact-sub { font-size: 0.9rem; color: #8892B0; line-height: 1.8; margin-bottom: 32px; }
+.c-detail { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 0.88rem; color: #CCD6F6; }
+.c-icon { width: 30px; height: 30px; background: rgba(0,102,255,0.12); border: 1px solid rgba(0,102,255,0.25); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; color: #0066FF; flex-shrink: 0; }
+.form-wrap { display: flex; flex-direction: column; gap: 16px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group label { font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #8892B0; }
+.form-group input, .form-group select, .form-group textarea { background: #0A0D1A; border: 1px solid rgba(0,102,255,0.18); color: #F0F4FF; padding: 13px 15px; font-family: 'Barlow', sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.3s; width: 100%; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #0066FF; }
+.form-group input::placeholder, .form-group textarea::placeholder { color: rgba(136,146,176,0.4); }
+.form-group select option { background: #0A0D1A; }
+.form-group textarea { resize: none; height: 110px; }
+.form-success { display: none; color: #0066FF; text-align: center; font-size: 0.82rem; font-weight: 700; letter-spacing: 2px; margin-top: 12px; }
+
+/* FOOTER */
+footer { padding: 48px; border-top: 1px solid rgba(0,102,255,0.12); display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; background: #060810; }
+.footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: 3px; }
+.footer-logo span { color: #0066FF; }
+.footer-copy { font-size: 0.75rem; color: #8892B0; }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a { font-size: 0.7rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #8892B0; text-decoration: none; transition: color 0.3s; }
+.footer-links a:hover { color: #0066FF; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  /* NAV */
+  nav { padding: 14px 18px; }
+  .nav-links { display: none; }
+  .nav-cta { padding: 8px 14px; font-size: 0.68rem; }
+
+  /* HERO — tighter, no wasted space */
+  .hero { padding: 72px 20px 48px; min-height: auto; }
+  .hero h1 { font-size: clamp(2.4rem, 11vw, 3.2rem); line-height: 0.92; margin-bottom: 16px; }
+  .hero-sub { font-size: 0.9rem; line-height: 1.7; margin-bottom: 28px; }
+  .hero-btns { flex-direction: column; gap: 10px; }
+  .btn-primary, .btn-ghost { padding: 15px 24px; font-size: 0.78rem; text-align: center; width: 100%; }
+
+  /* SECTIONS */
+  .wrap { padding: 48px 20px; }
+  .sec-tag { margin-bottom: 8px; }
+  .sec-title { font-size: clamp(1.8rem, 8vw, 2.4rem); margin-bottom: 24px; }
+
+  /* STATS */
+  .stats-grid { grid-template-columns: repeat(2,1fr); gap: 2px; }
+  .stat-card { padding: 20px 16px; }
+  .stat-num { font-size: 2rem; }
+  .stat-label { font-size: 0.6rem; }
+
+  /* PILLARS */
+  .pillars-grid { grid-template-columns: 1fr; gap: 2px; }
+  .pillar { padding: 24px 20px; }
+  .pillar-num { font-size: 2.2rem; }
+  .pillar-title { font-size: 1.1rem; }
+
+  /* STEPS */
+  .steps-grid { grid-template-columns: 1fr; gap: 20px; }
+  .steps-grid::before { display: none; }
+  .step { padding-top: 52px; }
+
+  /* PRICING — single column, clean stack */
+  .pricing-grid { grid-template-columns: 1fr; gap: 2px; }
+  .price-card { padding: 28px 20px; }
+  .plan-price { font-size: 2.2rem; }
+
+  /* ADD-ONS — stack to single column on mobile */
+  #pricing [style*="grid-template-columns: repeat(3,1fr)"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+  }
+
+  /* SITE TYPES — 2 columns on mobile */
+  #pricing [style*="grid-template-columns: repeat(4,1fr)"] {
+    display: grid !important;
+    grid-template-columns: repeat(2,1fr) !important;
+    gap: 2px !important;
+  }
+
+  /* INDUSTRIES */
+  .industries-grid { grid-template-columns: repeat(2,1fr); gap: 2px; }
+  .industry-icon { height: 80px; font-size: 1.8rem; }
+
+  /* PERKS */
+  .perk-row { padding: 14px 16px; gap: 12px; }
+
+  /* CONTACT */
+  .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+  .form-row { grid-template-columns: 1fr; }
+
+  /* FOOTER */
+  footer { padding: 28px 20px; flex-direction: column; gap: 16px; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+  .f-copy { font-size: 0.7rem; }
+}
+
+
+/* MEDLOCK BACKEND */
+#crmBackend{display:none;position:fixed;inset:0;z-index:9999;background:#060810;color:#F0F4FF;font-family:'Barlow',sans-serif;overflow-y:auto;overflow-x:hidden;}
+#crmBackend.visible{display:block;}
+#crmBackend *{box-sizing:border-box;}
+#crmBackend::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,102,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,255,0.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;z-index:0;}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+#crmBackend, #crmBackend{background:#060810 !important;color:#F0F4FF;font-family:'Barlow',sans-serif;min-height:100vh;overflow-x:hidden;color-scheme:dark;}
+
+:root{
+  --blue:#0066FF;--blue-dim:rgba(0,102,255,0.12);--blue-border:rgba(0,102,255,0.2);
+  --black:#060810;--card:#0C0F1A;--border:rgba(255,255,255,0.07);
+  --muted:#8892A0;--text:#F0F4FF;--light:#CCD6F6;
+  --green:#22C55E;--green-dim:rgba(34,197,94,0.1);
+  --amber:#F59E0B;--amber-dim:rgba(245,158,11,0.1);
+  --red:#EF4444;--red-dim:rgba(239,68,68,0.1);
+  --purple:#A855F7;--purple-dim:rgba(168,85,247,0.1);
+}
+
+#crmBackend{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(0,102,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,102,255,0.03) 1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none;z-index:0;
+}
+
+/* HEADER */
+#crmBackend header{
+  position:sticky;top:0;z-index:100;
+  background:rgba(6,8,16,0.97);border-bottom:1px solid var(--border);
+  padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;
+  backdrop-filter:blur(12px);
+}
+#crmBackend .logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;color:var(--text);}
+#crmBackend .logo span{color:var(--blue);}
+#crmBackend .header-right{display:flex;align-items:center;gap:12px;}
+#crmBackend .hdr-tag{font-size:0.6rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+#crmBackend .add-btn{
+  background:var(--blue);color:#fff;border:none;padding:8px 18px;
+  font-family:'Barlow',sans-serif;font-size:0.78rem;font-weight:700;
+  letter-spacing:0.5px;cursor:pointer;transition:opacity 0.2s;display:flex;align-items:center;gap:6px;
+}
+#crmBackend .add-btn:hover{opacity:0.85;}
+#crmBackend .nav-tab{
+  padding:8px 18px;font-family:'Barlow',sans-serif;font-size:0.72rem;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;background:transparent;
+  border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all 0.2s;
+}
+#crmBackend .nav-tab.active{background:var(--blue-dim);border-color:var(--blue);color:var(--blue);}
+#crmBackend .nav-tab:hover:not(.active){border-color:rgba(255,255,255,0.2);color:var(--text);}
+
+/* STATS BAR */
+#crmBackend .stats-bar{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  border-bottom:1px solid var(--border);
+}
+#crmBackend .stat{
+  padding:16px 20px;border-right:1px solid var(--border);
+  display:flex;flex-direction:column;gap:3px;
+}
+#crmBackend .stat:last-child{border-right:none;}
+#crmBackend .stat-n{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;line-height:1;color:var(--text);}
+#crmBackend .stat-n.blue{color:var(--blue);}
+#crmBackend .stat-n.green{color:var(--green);}
+#crmBackend .stat-n.amber{color:var(--amber);}
+#crmBackend .stat-l{font-size:0.58rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+
+/* MAIN */
+#crmBackend main{position:relative;z-index:1;padding:24px;}
+
+/* PIPELINE COLUMNS */
+#crmBackend .pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px;}
+#crmBackend .col-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;margin-bottom:8px;
+}
+#crmBackend .col-label{font-size:0.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;}
+#crmBackend .col-count{font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:20px;}
+#crmBackend .col-prospect .col-label{color:var(--muted);}
+#crmBackend .col-prospect .col-count{background:rgba(255,255,255,0.08);color:var(--muted);}
+#crmBackend .col-pitched .col-label{color:var(--blue);}
+#crmBackend .col-pitched .col-count{background:var(--blue-dim);color:var(--blue);}
+#crmBackend .col-active .col-label{color:var(--green);}
+#crmBackend .col-active .col-count{background:var(--green-dim);color:var(--green);}
+#crmBackend .col-closed .col-label{color:var(--amber);}
+#crmBackend .col-closed .col-count{background:var(--amber-dim);color:var(--amber);}
+
+#crmBackend .col-body{min-height:200px;display:flex;flex-direction:column;gap:8px;}
+
+/* PROSPECT CARD */
+#crmBackend .pcard{
+  background:var(--card);border:1px solid var(--border);
+  padding:14px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;
+}
+#crmBackend .pcard::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--border);transition:background 0.2s;
+}
+#crmBackend .pcard:hover{border-color:rgba(0,102,255,0.3);transform:translateY(-1px);}
+#crmBackend .pcard:hover::before{background:var(--blue);}
+#crmBackend .pcard.prospect::before{background:rgba(255,255,255,0.15);}
+#crmBackend .pcard.pitched::before{background:var(--blue);}
+#crmBackend .pcard.active::before{background:var(--green);}
+#crmBackend .pcard.closed::before{background:var(--amber);}
+#crmBackend .pcard-biz{font-size:0.88rem;font-weight:700;color:var(--text);margin-bottom:3px;}
+#crmBackend .pcard-name{font-size:0.74rem;color:var(--muted);margin-bottom:8px;}
+#crmBackend .pcard-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+#crmBackend .pcard-industry{font-size:0.62rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,0.05);padding:2px 7px;}
+#crmBackend .pcard-plan{font-size:0.68rem;font-weight:700;color:var(--blue);}
+#crmBackend .pcard-date{font-size:0.62rem;color:var(--muted);}
+#crmBackend .pcard-note{font-size:0.74rem;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+
+/* EMPTY STATE */
+#crmBackend .empty-col{
+  border:1px dashed rgba(255,255,255,0.06);
+  padding:24px 16px;text-align:center;
+}
+#crmBackend .empty-col-t{font-size:0.68rem;color:rgba(255,255,255,0.18);letter-spacing:1px;line-height:1.6;}
+#crmBackend .pcard.active{background:linear-gradient(135deg,rgba(34,197,94,0.06),var(--card));}
+#crmBackend .pcard.active .pcard-biz{color:var(--green);}
+#crmBackend .loyal-crown{font-size:0.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--green);background:var(--green-dim);padding:2px 8px;display:inline-block;margin-bottom:6px;}
+#crmBackend .pcard.active::before{background:var(--green) !important;}
+#crmBackend .pcard.closed{background:linear-gradient(135deg,rgba(245,158,11,0.06),var(--card));}
+#crmBackend .pcard.closed .pcard-biz{color:var(--amber);}
+
+/* TABLE VIEW */
+#crmBackend .view-toggle{display:flex;gap:2px;margin-bottom:20px;}
+#crmBackend .vt-btn{
+  padding:7px 16px;font-family:'Barlow',sans-serif;font-size:0.72rem;font-weight:600;
+  letter-spacing:1px;text-transform:uppercase;background:var(--card);
+  border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all 0.2s;
+}
+#crmBackend .vt-btn.active{background:var(--blue-dim);border-color:var(--blue);color:var(--blue);}
+
+#crmBackend .tbl-wrap{overflow-x:auto;}
+#crmBackend .crm-table{width:100%;border-collapse:collapse;}
+#crmBackend .crm-table th{
+  font-size:0.6rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  padding:10px 14px;border-bottom:1px solid rgba(0,102,255,0.2);color:var(--muted);
+  text-align:left;background:rgba(0,102,255,0.04);white-space:nowrap;
+}
+#crmBackend .crm-table td{
+  padding:12px 14px;border-bottom:1px solid var(--border);
+  font-size:0.84rem;color:var(--light);vertical-align:middle;
+}
+#crmBackend .crm-table tr:hover td{background:rgba(255,255,255,0.02);cursor:pointer;}
+#crmBackend .status-pill{
+  display:inline-block;padding:3px 10px;font-size:0.62rem;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+}
+#crmBackend .s-prospect{background:rgba(255,255,255,0.08);color:var(--muted);}
+#crmBackend .s-pitched{background:var(--blue-dim);color:var(--blue);}
+#crmBackend .s-active{background:var(--green-dim);color:var(--green);}
+#crmBackend .s-closed{background:var(--amber-dim);color:var(--amber);}
+#crmBackend .s-lost{background:var(--red-dim);color:var(--red);}
+
+#crmBackend .plan-tag{font-size:0.72rem;font-weight:700;color:var(--blue);}
+#crmBackend .action-btns{display:flex;gap:6px;}
+#crmBackend .action-btn{
+  padding:4px 10px;font-size:0.65rem;font-weight:600;letter-spacing:1px;
+  text-transform:uppercase;cursor:pointer;border:1px solid var(--border);
+  background:transparent;color:var(--muted);transition:all 0.2s;font-family:'Barlow',sans-serif;
+}
+#crmBackend .action-btn:hover{border-color:var(--blue);color:var(--blue);}
+#crmBackend .action-btn.del:hover{border-color:var(--red);color:var(--red);}
+
+/* MODAL */
+#crmBackend .modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:500;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;visibility:hidden;transition:all 0.2s;
+}
+#crmBackend .modal-overlay.open{opacity:1;visibility:visible;}
+#crmBackend .modal{
+  background:#0C0F1A;border:1px solid rgba(0,102,255,0.2);
+  width:100%;max-width:560px;max-height:90vh;overflow-y:auto;
+  position:relative;
+}
+#crmBackend .modal-header{
+  padding:20px 24px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(0,102,255,0.06);
+}
+#crmBackend .modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;color:var(--text);}
+#crmBackend .modal-close{background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;padding:4px;}
+#crmBackend .modal-close:hover{color:var(--text);}
+#crmBackend .modal-body{padding:24px;}
+#crmBackend .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+#crmBackend .form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+#crmBackend .form-group label{font-size:0.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+#crmBackend .form-group input, #crmBackend .form-group select, #crmBackend .form-group textarea{
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  color:var(--text);padding:10px 12px;font-family:'Barlow',sans-serif;font-size:0.86rem;
+  outline:none;transition:border-color 0.2s;width:100%;
+}
+#crmBackend .form-group input:focus, #crmBackend .form-group select:focus, #crmBackend .form-group textarea:focus{border-color:var(--blue);}
+#crmBackend .form-group input::placeholder, #crmBackend .form-group textarea::placeholder{color:rgba(255,255,255,0.2);}
+#crmBackend .form-group select option{background:#0C0F1A;}
+#crmBackend .form-group textarea{resize:none;height:80px;line-height:1.5;}
+#crmBackend .modal-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end;}
+#crmBackend .btn-primary{background:var(--blue);color:#fff;border:none;padding:10px 24px;font-family:'Barlow',sans-serif;font-size:0.8rem;font-weight:700;letter-spacing:0.5px;cursor:pointer;transition:opacity 0.2s;}
+#crmBackend .btn-primary:hover{opacity:0.85;}
+#crmBackend .btn-secondary{background:transparent;color:var(--muted);border:1px solid var(--border);padding:10px 20px;font-family:'Barlow',sans-serif;font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;}
+#crmBackend .btn-secondary:hover{border-color:var(--text);color:var(--text);}
+
+/* SEARCH */
+#crmBackend .toolbar{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+#crmBackend .search-wrap{position:relative;flex:1;max-width:320px;}
+#crmBackend .search-wrap input{
+  width:100%;background:var(--card);border:1px solid var(--border);
+  color:var(--text);padding:9px 12px 9px 36px;font-family:'Barlow',sans-serif;
+  font-size:0.84rem;outline:none;transition:border-color 0.2s;
+}
+#crmBackend .search-wrap input:focus{border-color:var(--blue);}
+#crmBackend .search-wrap input::placeholder{color:var(--muted);}
+#crmBackend .search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.8rem;}
+#crmBackend .filter-select{
+  background:var(--card);border:1px solid var(--border);color:var(--text);
+  padding:9px 12px;font-family:'Barlow',sans-serif;font-size:0.8rem;outline:none;cursor:pointer;
+}
+#crmBackend .filter-select:focus{border-color:var(--blue);}
+#crmBackend .filter-select option{background:#0C0F1A;}
+
+/* DETAIL PANEL */
+#crmBackend .detail-panel{
+  position:fixed;right:0;top:0;bottom:0;width:380px;
+  background:#0A0D1A;border-left:1px solid rgba(0,102,255,0.2);
+  z-index:200;transform:translateX(100%);transition:transform 0.3s;
+  overflow-y:auto;
+}
+#crmBackend .detail-panel.open{transform:translateX(0);}
+#crmBackend .dp-header{padding:20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+#crmBackend .dp-biz{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:2px;color:var(--text);}
+#crmBackend .dp-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1rem;}
+#crmBackend .dp-body{padding:20px;}
+#crmBackend .dp-section{margin-bottom:20px;}
+#crmBackend .dp-sec-title{font-size:0.58rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+#crmBackend .dp-sec-title::before{content:'';width:12px;height:1px;background:var(--blue);}
+#crmBackend .dp-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);}
+#crmBackend .dp-row:last-child{border-bottom:none;}
+#crmBackend .dp-key{font-size:0.72rem;color:var(--muted);}
+#crmBackend .dp-val{font-size:0.82rem;font-weight:600;color:var(--text);}
+#crmBackend .dp-note{font-size:0.82rem;color:var(--light);line-height:1.65;background:rgba(255,255,255,0.03);padding:12px;border-left:2px solid var(--blue);}
+#crmBackend .stage-btns{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+#crmBackend .stage-btn{
+  padding:8px;font-size:0.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;
+  transition:all 0.2s;font-family:'Barlow',sans-serif;
+}
+#crmBackend .stage-btn:hover, #crmBackend .stage-btn.active{border-color:var(--blue);background:var(--blue-dim);color:var(--blue);}
+#crmBackend .stage-btn.active-green{border-color:var(--green);background:var(--green-dim);color:var(--green);}
+#crmBackend .stage-btn.active-amber{border-color:var(--amber);background:var(--amber-dim);color:var(--amber);}
+#crmBackend .mrr-big{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--green);line-height:1;}
+
+/* MOBILE */
+@media(max-width:768px){
+  .pipeline{grid-template-columns:1fr 1fr;}
+  .stats-bar{grid-template-columns:repeat(3,1fr);}
+  .stats-bar .stat:nth-child(4),.stats-bar .stat:nth-child(5){display:none;}
+  .form-row{grid-template-columns:1fr;}
+  .detail-panel{width:100%;}
+}
+
+/* P&L SHEET */
+#crmBackend #pnlView{display:none;}
+#crmBackend .pnl-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:28px;}
+#crmBackend .pnl-card{background:var(--card);border:1px solid var(--border);padding:20px 22px;position:relative;overflow:hidden;}
+#crmBackend .pnl-card::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+#crmBackend .pnl-card.income::after{background:var(--green);}
+#crmBackend .pnl-card.expense::after{background:var(--red);}
+#crmBackend .pnl-card.profit::after{background:var(--blue);}
+#crmBackend .pnl-card-label{font-size:0.58rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+#crmBackend .pnl-card-num{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;line-height:1;margin-bottom:4px;}
+#crmBackend .pnl-card-num.green{color:var(--green);}
+#crmBackend .pnl-card-num.red{color:var(--red);}
+#crmBackend .pnl-card-num.blue{color:var(--blue);}
+#crmBackend .pnl-card-sub{font-size:0.72rem;color:var(--muted);}
+
+#crmBackend .pnl-section{margin-bottom:28px;}
+#crmBackend .pnl-sec-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+#crmBackend .pnl-sec-title{font-size:0.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:8px;}
+#crmBackend .pnl-sec-title::before{content:'';width:16px;height:2px;background:var(--blue);}
+#crmBackend .add-entry-btn{background:transparent;border:1px solid var(--border);color:var(--muted);padding:5px 14px;font-family:'Barlow',sans-serif;font-size:0.68rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all 0.2s;}
+#crmBackend .add-entry-btn:hover{border-color:var(--blue);color:var(--blue);}
+
+#crmBackend .pnl-table{width:100%;border-collapse:collapse;}
+#crmBackend .pnl-table th{font-size:0.58rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:9px 12px;border-bottom:1px solid rgba(0,102,255,0.15);color:var(--muted);text-align:left;background:rgba(0,102,255,0.03);}
+#crmBackend .pnl-table td{padding:11px 12px;border-bottom:1px solid var(--border);font-size:0.83rem;color:var(--light);vertical-align:middle;}
+#crmBackend .pnl-table tr:hover td{background:rgba(255,255,255,0.02);}
+#crmBackend .pnl-table td.amount-inc{color:var(--green);font-weight:700;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.5px;}
+#crmBackend .pnl-table td.amount-exp{color:var(--red);font-weight:700;font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:0.5px;}
+#crmBackend .cat-pill{display:inline-block;padding:2px 8px;font-size:0.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:rgba(255,255,255,0.06);color:var(--muted);}
+#crmBackend .del-entry{background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.8rem;padding:3px 6px;transition:color 0.2s;}
+#crmBackend .del-entry:hover{color:var(--red);}
+
+#crmBackend .month-selector{display:flex;align-items:center;gap:8px;margin-bottom:20px;}
+#crmBackend .month-btn{background:var(--card);border:1px solid var(--border);color:var(--muted);width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:0.9rem;transition:all 0.2s;}
+#crmBackend .month-btn:hover{border-color:var(--blue);color:var(--blue);}
+#crmBackend .month-display{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--text);min-width:140px;text-align:center;}
+
+#crmBackend .profit-bar-wrap{background:var(--card);border:1px solid var(--border);padding:20px 22px;margin-bottom:28px;}
+#crmBackend .profit-bar-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+#crmBackend .profit-bar-title{font-size:0.62rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);}
+#crmBackend .profit-bar-pct{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--green);}
+#crmBackend .profit-bar-track{height:8px;background:rgba(255,255,255,0.06);position:relative;}
+#crmBackend .profit-bar-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--green));transition:width 0.6s;}
+
+/* PITCH READINESS CHECKLIST */
+#crmBackend .checklist-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:600;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;visibility:hidden;transition:all 0.2s;
+}
+#crmBackend .checklist-overlay.open{opacity:1;visibility:visible;}
+#crmBackend .checklist-modal{
+  background:#0C0F1A;border:1px solid rgba(0,102,255,0.25);
+  width:100%;max-width:480px;position:relative;
+}
+#crmBackend .checklist-header{
+  padding:20px 24px;border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,rgba(239,68,68,0.08),rgba(0,102,255,0.06));
+}
+#crmBackend .checklist-pretitle{font-size:0.58rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--red);margin-bottom:6px;}
+#crmBackend .checklist-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:var(--text);line-height:1;}
+#crmBackend .checklist-sub{font-size:0.78rem;color:var(--muted);margin-top:6px;line-height:1.5;}
+#crmBackend .checklist-body{padding:24px;}
+#crmBackend .check-item{
+  display:flex;align-items:flex-start;gap:14px;padding:16px;
+  border:1px solid var(--border);margin-bottom:10px;
+  transition:all 0.2s;cursor:pointer;user-select:none;
+}
+#crmBackend .check-item:hover{border-color:rgba(0,102,255,0.3);}
+#crmBackend .check-item.checked{border-color:var(--green);background:var(--green-dim);}
+#crmBackend .check-box{
+  width:22px;height:22px;border:2px solid var(--border);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;transition:all 0.2s;margin-top:1px;
+}
+#crmBackend .check-item.checked .check-box{background:var(--green);border-color:var(--green);}
+#crmBackend .check-icon{font-size:0.75rem;color:#fff;display:none;}
+#crmBackend .check-item.checked .check-icon{display:block;}
+#crmBackend .check-content{}
+#crmBackend .check-title{font-size:0.88rem;font-weight:700;color:var(--text);margin-bottom:3px;}
+#crmBackend .check-item.checked .check-title{color:var(--green);}
+#crmBackend .check-desc{font-size:0.74rem;color:var(--muted);line-height:1.5;}
+#crmBackend .checklist-warning{
+  background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);
+  padding:12px 16px;margin-bottom:16px;display:flex;gap:10px;align-items:flex-start;
+}
+#crmBackend .checklist-warning-icon{font-size:1rem;flex-shrink:0;}
+#crmBackend .checklist-warning-text{font-size:0.76rem;color:rgba(239,68,68,0.8);line-height:1.5;}
+#crmBackend .checklist-footer{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end;}
+#crmBackend .btn-arm{
+  background:var(--red);color:#fff;border:none;padding:11px 28px;
+  font-family:'Barlow',sans-serif;font-size:0.8rem;font-weight:700;
+  letter-spacing:0.5px;cursor:pointer;opacity:0.4;pointer-events:none;transition:all 0.2s;
+  display:flex;align-items:center;gap:8px;
+}
+#crmBackend .btn-arm.ready{opacity:1;pointer-events:all;background:var(--green);}
+#crmBackend .btn-arm.ready:hover{opacity:0.88;}
+#crmBackend .progress-bar-wrap{margin:0 24px 20px;background:rgba(255,255,255,0.06);height:4px;}
+#crmBackend .progress-bar-fill{height:100%;background:var(--green);transition:width 0.4s;width:0%;}
+#crmBackend .progress-label{display:flex;justify-content:space-between;margin:0 24px 8px;}
+#crmBackend .progress-label-text{font-size:0.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+#crmBackend .progress-label-count{font-size:0.6rem;font-weight:700;color:var(--green);}
+
+/* LOGIN SCREEN */
+#crmBackend #loginScreen{
+  position:fixed;inset:0;z-index:1000;
+  background:#060810;display:flex;align-items:center;justify-content:center;
+}
+#crmBackend #loginScreen::before{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(0,102,255,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,102,255,0.03) 1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none;
+}
+#crmBackend .login-wrap{
+  position:relative;z-index:1;width:100%;max-width:400px;padding:20px;
+}
+#crmBackend .login-logo{
+  font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:4px;
+  color:#F0F4FF;text-align:center;margin-bottom:4px;
+}
+#crmBackend .login-logo span{color:#0066FF;}
+#crmBackend .login-sub{
+  font-size:0.58rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;
+  color:#8892A0;text-align:center;margin-bottom:40px;
+}
+#crmBackend .login-box{
+  background:#0C0F1A;border:1px solid rgba(0,102,255,0.2);padding:36px 32px;
+}
+#crmBackend .login-box-title{
+  font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:2px;
+  color:#F0F4FF;margin-bottom:4px;
+}
+#crmBackend .login-box-sub{font-size:0.76rem;color:#8892A0;margin-bottom:24px;line-height:1.5;}
+#crmBackend .login-input-wrap{position:relative;margin-bottom:16px;}
+#crmBackend .login-input-wrap label{
+  font-size:0.58rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:#8892A0;display:block;margin-bottom:6px;
+}
+#crmBackend .login-input{
+  width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  color:#F0F4FF;padding:12px 14px;font-family:'Barlow',sans-serif;font-size:0.9rem;
+  outline:none;transition:border-color 0.2s;letter-spacing:2px;
+}
+#crmBackend .login-input:focus{border-color:#0066FF;}
+#crmBackend .login-input::placeholder{color:rgba(255,255,255,0.15);letter-spacing:0;}
+#crmBackend .login-btn{
+  width:100%;background:#0066FF;color:#fff;border:none;padding:14px;
+  font-family:'Barlow',sans-serif;font-size:0.85rem;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;cursor:pointer;
+  transition:opacity 0.2s;margin-top:8px;
+}
+#crmBackend .login-btn:hover{opacity:0.85;}
+#crmBackend .login-error{
+  background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);
+  color:rgba(239,68,68,0.9);padding:10px 14px;font-size:0.76rem;
+  margin-bottom:16px;display:none;
+}
+#crmBackend .login-error.show{display:block;}
+#crmBackend .login-divider{
+  display:flex;align-items:center;gap:12px;margin:24px 0 0;
+}
+#crmBackend .login-divider::before, #crmBackend .login-divider::after{
+  content:'';flex:1;height:1px;background:rgba(255,255,255,0.06);
+}
+#crmBackend .login-divider-text{font-size:0.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);}
+#crmBackend .login-tagline{
+  text-align:center;margin-top:24px;
+  font-size:0.68rem;font-style:italic;color:rgba(255,255,255,0.2);line-height:1.6;
+}
+
+/* APP HIDDEN UNTIL LOGIN */
+#crmBackend #appWrapper{display:none;}
+
+
+/* ═══ ANIMATIONS ═══ */
+
+/* GLITCH */
+@keyframes glitch1 {
+  0%,100%{clip-path:inset(0 0 95% 0);transform:translateX(0);}
+  20%{clip-path:inset(30% 0 50% 0);transform:translateX(-4px);}
+  40%{clip-path:inset(60% 0 20% 0);transform:translateX(4px);}
+  60%{clip-path:inset(10% 0 80% 0);transform:translateX(-2px);}
+  80%{clip-path:inset(80% 0 5% 0);transform:translateX(2px);}
+}
+@keyframes glitch2 {
+  0%,100%{clip-path:inset(0 0 95% 0);transform:translateX(0);}
+  20%{clip-path:inset(50% 0 30% 0);transform:translateX(4px);}
+  40%{clip-path:inset(20% 0 60% 0);transform:translateX(-4px);}
+  60%{clip-path:inset(80% 0 10% 0);transform:translateX(2px);}
+  80%{clip-path:inset(5% 0 80% 0);transform:translateX(-2px);}
+}
+.glitch-active {position:relative;}
+.glitch-active::before,
+.glitch-active::after {
+  content: attr(data-text);
+  position:absolute;inset:0;
+  font-family:inherit;font-size:inherit;font-weight:inherit;
+  letter-spacing:inherit;color:inherit;
+}
+.glitch-active::before {
+  color:#0066FF;animation:glitch1 0.4s steps(1) forwards;
+}
+.glitch-active::after {
+  color:#FF3366;animation:glitch2 0.4s steps(1) forwards;
+}
+
+/* TYPEWRITER CURSOR */
+.tw-cursor {
+  display:inline-block;width:3px;background:#0066FF;
+  margin-left:3px;animation:blink 0.8s step-end infinite;
+  vertical-align:baseline;height:0.85em;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* COUNTER */
+.counter{transition:all 0.1s;}
+
+/* SECTION REVEAL */
+.reveal {
+  opacity:0;transform:translateY(32px);
+  transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1),transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+.reveal.visible {opacity:1;transform:translateY(0);}
+
+/* HERO ENTRANCE */
+.hero-content {opacity:0;transform:translateY(20px);}
+.hero-content.loaded {
+  opacity:1;transform:translateY(0);
+  transition:opacity 0.9s ease,transform 0.9s ease;
+}
+
+</style>
+</head>
+<body>
+
+<canvas id="particleCanvas" style="position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.5;"></canvas>
+<nav>
+  <div class="logo">MEDLOCK<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Started</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div style="position:relative;z-index:1;">
+    <p class="hero-tag">// Medlock Design Solutions</p>
+    <h1 id="heroHeadline"><span id="line1">YOUR SITE.</span><br><span class="accent" id="line2">THEIR</span><br><span class="outline" id="line3">NIGHTMARE.</span></h1>
+    <p class="hero-sub">Custom websites built to <strong>outperform your competition</strong> — not templates, not shortcuts. Brand-specific, fast-delivered, and priced so far below market it's almost unfair.</p>
+    <div class="hero-btns">
+      <a href="#pricing" class="btn-primary">See Pricing</a>
+      <a href="#process" class="btn-ghost">How It Works</a>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee">
+    <span class="marquee-item">Fast Delivery</span>
+    <span class="marquee-item">Custom Branded</span>
+    <span class="marquee-item">Below Market Pricing</span>
+    <span class="marquee-item">Built to Compete</span>
+    <span class="marquee-item">No Templates</span>
+    <span class="marquee-item">Monthly Support</span>
+    <span class="marquee-item">Fast Delivery</span>
+    <span class="marquee-item">Custom Branded</span>
+    <span class="marquee-item">Below Market Pricing</span>
+    <span class="marquee-item">Built to Compete</span>
+    <span class="marquee-item">No Templates</span>
+    <span class="marquee-item">Monthly Support</span>
+  </div>
+</div>
+
+<section style="background:#060810; position:relative; z-index:1;">
+  <div class="wrap" style="padding-top:52px;padding-bottom:52px;">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-num">$299</div><div class="stat-lbl">Starting Setup Fee</div></div>
+      <div class="stat-card"><div class="stat-num">$79</div><div class="stat-lbl">Per Month to Maintain</div></div>
+      <div class="stat-card"><div class="stat-num">10X</div><div class="stat-lbl">Below Agency Rates</div></div>
+      <div class="stat-card"><div class="stat-num">100%</div><div class="stat-lbl">Custom to Your Brand</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#0A0D1A; position:relative; z-index:1;" id="services">
+  <div class="wrap">
+    <div class="sec-tag">What We Deliver</div>
+    <div class="sec-title">FOUR PILLARS.<br><span class="accent">ZERO COMPROMISE.</span></div>
+    <div class="pillars-grid">
+      <div class="pillar"><div class="pillar-num">01</div><div class="pillar-title">FAST</div><p class="pillar-desc">Your site goes live in days, not months. We move fast because your business can't wait.</p></div>
+      <div class="pillar"><div class="pillar-num">02</div><div class="pillar-title">RELIABLE</div><p class="pillar-desc">Always on, always maintained. Monthly support keeps your site sharp and ahead.</p></div>
+      <div class="pillar"><div class="pillar-num">03</div><div class="pillar-title">FRESH</div><p class="pillar-desc">No recycled templates. Every site is built from scratch for your brand and your edge.</p></div>
+      <div class="pillar"><div class="pillar-num">04</div><div class="pillar-title">AFFORDABLE</div><p class="pillar-desc">Agencies charge $10K for what we deliver at $299. Same quality. Fraction of the cost.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#060810; position:relative; z-index:1;" id="process">
+  <div class="wrap">
+    <div class="sec-tag">How It Works</div>
+    <div class="sec-title">THREE STEPS.<br><span class="accent">ONE GOAL.</span></div>
+    <div class="steps-grid">
+      <div class="step"><div class="step-num">01</div><div class="step-title">We Learn Your Brand</div><p class="step-desc">Deep intake — your story, your competitors, your edge. We research what everyone else is doing so we can do it better.</p></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">We Build Your Weapon</div><p class="step-desc">Custom design, compelling copy, fast performance. Every detail crafted to make your competitors look amateur.</p></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">We Launch & Stay</div><p class="step-desc">Go live fast. Then we stick around — updates, maintenance, and optimization every month.</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#0A0D1A; position:relative; z-index:1;" id="pricing">
+  <div class="wrap">
+    <div class="sec-tag">Transparent Pricing</div>
+    <div class="sec-title">NO SURPRISES.<br><span class="accent">NO GAMES.</span></div>
+
+    <!-- CORE PLANS -->
+    <div class="pricing-grid" style="margin-bottom:3px;">
+      <div class="price-card">
+        <div class="plan-lbl">Starter</div>
+        <div class="plan-price">$79<span>/month</span></div>
+        <div class="plan-setup">+ <strong>$299</strong> one-time setup fee</div>
+        <ul class="plan-features">
+          <li>Up to 5 pages</li>
+          <li>Custom brand design</li>
+          <li>Mobile optimized</li>
+          <li>Contact form</li>
+          <li>Hosting included</li>
+          <li>1 revision round</li>
+        </ul>
+        <a href="#contact" class="plan-cta" style="display:block;text-align:center;">Get Started</a>
+      </div>
+      <div class="price-card featured">
+        <div class="plan-badge">Most Popular</div>
+        <div class="plan-lbl">Pro</div>
+        <div class="plan-price">$99<span>/month</span></div>
+        <div class="plan-setup">+ <strong>$499</strong> one-time setup fee</div>
+        <ul class="plan-features">
+          <li>Unlimited pages</li>
+          <li>Custom brand design</li>
+          <li>Advanced features</li>
+          <li>Priority support</li>
+          <li>Monthly optimization</li>
+          <li>Competitor monitoring</li>
+        </ul>
+        <a href="#contact" class="plan-cta featured-cta" style="display:block;text-align:center;">Get Started</a>
+      </div>
+      <div class="price-card">
+        <div class="plan-lbl">Enterprise</div>
+        <div class="plan-price">$199<span>/month</span></div>
+        <div class="plan-setup">+ <strong>$799</strong> one-time setup fee</div>
+        <ul class="plan-features">
+          <li>Everything in Pro</li>
+          <li>Client CRM dashboard</li>
+          <li>P&amp;L tracking tools</li>
+          <li>Monthly strategy call</li>
+          <li>E-commerce ready</li>
+          <li>Priority everything</li>
+        </ul>
+        <a href="#contact" class="plan-cta" style="display:block;text-align:center;">Get Started</a>
+      </div>
+    </div>
+
+    <!-- ADD-ONS -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:3px;">
+      <div style="background:rgba(0,102,255,0.07);border:1px solid rgba(0,102,255,0.18);padding:18px 20px;display:flex;align-items:center;gap:14px;">
+        <div style="font-size:1.3rem;flex-shrink:0;">⚡</div>
+        <div><div style="font-size:0.82rem;font-weight:700;color:#F0F4FF;margin-bottom:3px;">CRM Add-on</div><div style="font-size:0.72rem;color:#8892A0;">+$50/mo — Client pipeline &amp; lead tracking built into your site</div></div>
+      </div>
+      <div style="background:rgba(0,102,255,0.07);border:1px solid rgba(0,102,255,0.18);padding:18px 20px;display:flex;align-items:center;gap:14px;">
+        <div style="font-size:1.3rem;flex-shrink:0;">🛒</div>
+        <div><div style="font-size:0.82rem;font-weight:700;color:#F0F4FF;margin-bottom:3px;">E-Commerce Add-on</div><div style="font-size:0.72rem;color:#8892A0;">+$300 setup — Online store with products &amp; payments</div></div>
+      </div>
+      <div style="background:rgba(0,102,255,0.07);border:1px solid rgba(0,102,255,0.18);padding:18px 20px;display:flex;align-items:center;gap:14px;">
+        <div style="font-size:1.3rem;flex-shrink:0;">📅</div>
+        <div><div style="font-size:0.82rem;font-weight:700;color:#F0F4FF;margin-bottom:3px;">Booking Add-on</div><div style="font-size:0.72rem;color:#8892A0;">+$200 setup — Appointment scheduling for any business</div></div>
+      </div>
+    </div>
+
+    <!-- SITE TYPES -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:18px;text-align:center;">
+        <div style="font-size:1.2rem;margin-bottom:6px;">🏠</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#F0F4FF;margin-bottom:3px;">Home Services</div>
+        <div style="font-size:0.7rem;color:#0066FF;font-weight:600;">From $299</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:18px;text-align:center;">
+        <div style="font-size:1.2rem;margin-bottom:6px;">🍽️</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#F0F4FF;margin-bottom:3px;">Restaurant / Menu</div>
+        <div style="font-size:0.7rem;color:#0066FF;font-weight:600;">From $299</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:18px;text-align:center;">
+        <div style="font-size:1.2rem;margin-bottom:6px;">💇</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#F0F4FF;margin-bottom:3px;">Salon / Wellness</div>
+        <div style="font-size:0.7rem;color:#0066FF;font-weight:600;">From $299</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:18px;text-align:center;">
+        <div style="font-size:1.2rem;margin-bottom:6px;">🚀</div>
+        <div style="font-size:0.8rem;font-weight:700;color:#F0F4FF;margin-bottom:3px;">Landing Page</div>
+        <div style="font-size:0.7rem;color:#0066FF;font-weight:600;">$199 flat</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section style="background:#060810; position:relative; z-index:1;">
+  <div class="wrap">
+    <div class="sec-tag">The Real Math</div>
+    <div class="sec-title">WHAT OTHERS CHARGE<br><span class="accent">VS. WHAT YOU PAY.</span></div>
+    <div style="overflow-x:auto;">
+      <table class="comp-table">
+        <thead><tr><th>Service</th><th>Agency Price</th><th>Medlock Price</th></tr></thead>
+        <tbody>
+          <tr><td>Custom Website Design</td><td>$3,000 – $8,000</td><td>$299 – $499</td></tr>
+          <tr><td>Monthly Maintenance</td><td>$200 – $500/mo</td><td>$79 – $99/mo</td></tr>
+          <tr><td>Brand-Specific Custom Build</td><td>$5,000+</td><td>Included</td></tr>
+          <tr><td>Competitor Research</td><td>$1,000+</td><td>Included</td></tr>
+          <tr><td>Hosting</td><td>$50 – $200/mo</td><td>Included</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section style="background:#0A0D1A; position:relative; z-index:1;" id="portfolio">
+  <div class="wrap">
+    <div class="sec-tag">Who We Build For</div>
+    <div class="sec-title">ANY INDUSTRY.<br><span class="accent">ANY MARKET.</span></div>
+    <div class="industries-grid">
+      <div class="industry-card"><div class="industry-icon">🔧</div><div class="industry-body"><div class="industry-tag">Home Services</div><div class="industry-name">Contractors & Trades</div><div class="industry-desc">Plumbers, roofers, HVAC, electricians</div></div></div>
+      <div class="industry-card"><div class="industry-icon">🍽️</div><div class="industry-body"><div class="industry-tag">Food & Hospitality</div><div class="industry-name">Restaurants & Cafes</div><div class="industry-desc">Menus, reservations, local discovery</div></div></div>
+      <div class="industry-card"><div class="industry-icon">💆</div><div class="industry-body"><div class="industry-tag">Health & Wellness</div><div class="industry-name">Spas, Salons & Gyms</div><div class="industry-desc">Bookings, branding, client retention</div></div></div>
+      <div class="industry-card"><div class="industry-icon">🏡</div><div class="industry-body"><div class="industry-tag">Real Estate</div><div class="industry-name">Agents & Property</div><div class="industry-desc">Listings, lead gen, credibility</div></div></div>
+      <div class="industry-card"><div class="industry-icon">⚖️</div><div class="industry-body"><div class="industry-tag">Professional Services</div><div class="industry-name">Law, Finance & Consulting</div><div class="industry-desc">Trust, authority, client acquisition</div></div></div>
+      <div class="industry-card"><div class="industry-icon">🛍️</div><div class="industry-body"><div class="industry-tag">Retail & E-commerce</div><div class="industry-name">Shops & Boutiques</div><div class="industry-desc">Online presence, sales, brand identity</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#060810; position:relative; z-index:1;">
+  <div class="wrap">
+    <div style="max-width:680px;">
+      <div class="founding-badge">⚡ LIMITED AVAILABILITY</div>
+      <h2 class="founding-title">BE ONE OF OUR<br><span class="accent">FIRST 5 CLIENTS.</span></h2>
+      <p class="founding-sub">We're building our portfolio and want your business to be part of it. First 5 clients get priority treatment, direct access, and locked-in pricing forever.</p>
+      <div class="perk-row"><div class="perk-n">01</div><div><div class="perk-t">Priority Build</div><div class="perk-d">Your project jumps to the front. Full focus, exceptional results.</div></div></div>
+      <div class="perk-row"><div class="perk-n">02</div><div><div class="perk-t">White-Glove Service</div><div class="perk-d">Direct access throughout the build. No tickets, no wait times.</div></div></div>
+      <div class="perk-row"><div class="perk-n">03</div><div><div class="perk-t">Founding Client Rate</div><div class="perk-d">Lock in today's pricing forever. As we grow, rates go up — yours won't.</div></div></div>
+      <div class="slots-row">
+        <div class="slot-on"></div><div class="slot-on"></div>
+        <div class="slot-off"></div><div class="slot-off"></div><div class="slot-off"></div>
+      </div>
+      <div class="slots-txt">3 of 5 spots remaining</div>
+      <a href="#contact" class="btn-primary">Claim Your Spot →</a>
+    </div>
+  </div>
+</section>
+
+<section style="background:#0A0D1A; position:relative; z-index:1;" id="faq">
+  <div class="wrap">
+    <div class="sec-tag">FAQ</div>
+    <div class="sec-title">GOT<br><span class="accent">QUESTIONS?</span></div>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>How long does it take to build my site?</span><div class="faq-icon">+</div></div><div class="faq-a">Most sites are live within 3–7 business days. We move fast because we know your business can't wait. Complex builds may take up to 2 weeks — we'll always give you a clear timeline upfront.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Do I own my website?</span><div class="faq-icon">+</div></div><div class="faq-a">100%. Your site, your domain, your content. The monthly fee covers hosting and maintenance — not ownership. If you ever want to move on, we hand everything over, no strings attached.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What's included in monthly maintenance?</span><div class="faq-icon">+</div></div><div class="faq-a">Hosting, security updates, content updates, performance monitoring, and ongoing optimization. Think of us as your on-call web team — without the agency price tag.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>What if I already have a website?</span><div class="faq-icon">+</div></div><div class="faq-a">We'll review it, tell you exactly what's holding you back, and build something that crushes it. A lot of our best work starts as replacements for outdated or underperforming sites.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>How is this so much cheaper than agencies?</span><div class="faq-icon">+</div></div><div class="faq-a">Agencies have massive overhead — offices, account managers, layers of process. We're lean, fast, and tech-forward. We pass those savings to you and make it up in volume and long-term relationships.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)"><span>Can I cancel the monthly plan?</span><div class="faq-icon">+</div></div><div class="faq-a">Yes, anytime. No contracts, no cancellation fees. We keep clients by being great, not by trapping them. Cancel and your site stays live — you just take over hosting yourself.</div></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#060810; position:relative; z-index:1;" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <div class="sec-tag">Start Your Project</div>
+        <h2 class="contact-title">LET'S BUILD<br><span class="accent">YOUR EDGE.</span></h2>
+        <p class="contact-sub">Tell us about your business and we'll get back to you within 24 hours with a plan to outperform your competition.</p>
+        <div class="c-detail"><div class="c-icon">@</div><span>cmeds2001@gmail.com</span></div>
+        <div class="c-detail"><div class="c-icon">↻</div><span>Response within 24 hours</span></div>
+        <div class="c-detail"><div class="c-icon">▶</div><span>Live in as little as 3 days</span></div>
+      </div>
+      <div>
+        <div class="form-wrap">
+          <div class="form-row">
+            <div class="form-group"><label>Your Name</label><input type="text" placeholder="John Smith" id="fname"></div>
+            <div class="form-group"><label>Business Name</label><input type="text" placeholder="Smith Plumbing Co." id="fbiz"></div>
+          </div>
+          <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@smithplumbing.com" id="femail"></div>
+          <div class="form-group">
+            <label>Plan Interest</label>
+            <select id="fplan">
+              <option value="">Select a plan...</option>
+              <option>Starter — $299 setup + $79/mo</option>
+              <option>Pro — $499 setup + $99/mo</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Tell us about your business</label><textarea placeholder="What do you do, who are your customers, what makes you different?" id="fmessage"></textarea></div>
+          <button class="btn-primary" style="width:100%;padding:17px;font-size:0.82rem;" onclick="submitForm()">Send My Project Request →</button>
+          <div class="form-success" id="form-success">✓ MESSAGE SENT — WE'LL BE IN TOUCH WITHIN 24 HOURS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">MEDLOCK<span>.</span></div>
+  <div class="footer-copy">© 2025 Medlock Design Solutions. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+  function submitForm() {
+    const name = document.getElementById('fname').value;
+    const email = document.getElementById('femail').value;
+    if (!name || !email) { alert('Please fill in your name and email.'); return; }
+    document.getElementById('form-success').style.display = 'block';
+    document.querySelector('.form-wrap button').style.display = 'none';
+  }
+</script>
+
+
+<div id="crmBackend">
+
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen">
+  <div class="login-wrap">
+    <div class="login-logo">MEDLOCK<span>.</span></div>
+    <div class="login-sub">Financial Command Center</div>
+    <div class="login-box">
+      <div class="login-box-title">Commander Access</div>
+      <div class="login-box-sub">This is a private workspace. Enter your access code to enter The Coliseum.</div>
+      <div class="login-error" id="loginError">⚔️ Wrong code. Try again.</div>
+      <div class="login-input-wrap">
+        <label>Access Code</label>
+        <input type="password" class="login-input" id="loginInput" placeholder="Enter access code..." onkeydown="if(event.key==='Enter')attemptLogin()">
+      </div>
+      <button class="login-btn" onclick="attemptLogin()">Enter The Coliseum →</button>
+      <div class="login-divider"><span class="login-divider-text">Medlock Design Solutions</span></div>
+    </div>
+    <div class="login-tagline">"Every day is a battle.<br>Come prepared." 🏟️</div>
+  </div>
+</div>
+
+<!-- APP WRAPPER -->
+<div id="appWrapper">
+<header>
+  <div class="logo" id="logoBlock">MEDLOCK<span>.</span><div id="logoSub" style="font-family:'Barlow',sans-serif;font-size:0.52rem;font-weight:600;letter-spacing:2.5px;color:var(--muted);text-transform:uppercase;margin-top:2px;">The Coliseum</div></div>
+  <div class="header-right">
+    <div style="display:flex;gap:2px;">
+      <button class="nav-tab active" id="tab-crm" onclick="switchTab('crm')">The Coliseum</button>
+      <button class="nav-tab" id="tab-pnl" onclick="switchTab('pnl')">Financial Command Center</button>
+    </div>
+    <button class="add-btn" id="mainAddBtn" onclick="openModal()">⚔️ New Target</button>
+  </div>
+</header>
+
+<!-- STATS BAR -->
+<div class="stats-bar" id="statsBar">
+  <div class="stat"><div class="stat-n blue" id="statTotal">0</div><div class="stat-l">In The Arena</div></div>
+  <div class="stat"><div class="stat-n" id="statPitched">0</div><div class="stat-l">Engaged</div></div>
+  <div class="stat"><div class="stat-n green" id="statActive">0</div><div class="stat-l">Loyal Warriors</div></div>
+  <div class="stat"><div class="stat-n amber" id="statMRR">$0</div><div class="stat-l">Monthly Revenue</div></div>
+  <div class="stat"><div class="stat-n" id="statSetup">$0</div><div class="stat-l">Setup Collected</div></div>
+</div>
+
+<main id="crmMain">
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="view-toggle">
+      <button class="vt-btn active" onclick="setView('pipeline')" id="vt-pipeline">The Coliseum</button>
+      <button class="vt-btn" onclick="setView('table')" id="vt-table">All Clients</button>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Search prospects..." id="searchInput" oninput="render()">
+    </div>
+    <select class="filter-select" id="filterStatus" onchange="render()">
+      <option value="">All Stages</option>
+      <option value="prospect">Prospect</option>
+      <option value="pitched">Pitched</option>
+      <option value="active">Active</option>
+      <option value="closed">Closed Won</option>
+      <option value="lost">Lost</option>
+    </select>
+  </div>
+
+  <!-- PIPELINE VIEW -->
+  <div id="pipelineView">
+    <div class="pipeline">
+      <div>
+        <div class="col-header col-prospect">
+          <span class="col-label">🎯 Targets</span>
+          <span class="col-count" id="cnt-prospect">0</span>
+        </div>
+        <div class="col-body" id="col-prospect"></div>
+      </div>
+      <div>
+        <div class="col-header col-pitched">
+          <span class="col-label">⚔️ Engaged</span>
+          <span class="col-count" id="cnt-pitched">0</span>
+        </div>
+        <div class="col-body" id="col-pitched"></div>
+      </div>
+      <div>
+        <div class="col-header col-active">
+          <span class="col-label">🛡️ Loyal</span>
+          <span class="col-count" id="cnt-active">0</span>
+        </div>
+        <div class="col-body" id="col-active"></div>
+      </div>
+      <div>
+        <div class="col-header col-closed">
+          <span class="col-label">🏆 Victories</span>
+          <span class="col-count" id="cnt-closed">0</span>
+        </div>
+        <div class="col-body" id="col-closed"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE VIEW -->
+  <div id="tableView" style="display:none;">
+    <div class="tbl-wrap">
+      <table class="crm-table">
+        <thead>
+          <tr>
+            <th>Business</th>
+            <th>Contact</th>
+            <th>Industry</th>
+            <th>Plan</th>
+            <th>Status</th>
+            <th>MRR</th>
+            <th>Added</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<!-- ADD/EDIT MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">New Prospect</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Business Name *</label>
+          <input type="text" id="f-biz" placeholder="Lady On The Roof®">
+        </div>
+        <div class="form-group">
+          <label>Owner / Contact</label>
+          <input type="text" id="f-name" placeholder="Terri Kruse">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" id="f-phone" placeholder="(513) 231-0430">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="f-email" placeholder="sales@business.com">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Industry</label>
+          <select id="f-industry">
+            <option value="">Select industry...</option>
+            <option>Roofing</option>
+            <option>Plumbing</option>
+            <option>HVAC</option>
+            <option>Landscaping</option>
+            <option>Salon / Spa</option>
+            <option>Restaurant</option>
+            <option>Auto Repair</option>
+            <option>Retail</option>
+            <option>Contractor</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Plan</label>
+          <select id="f-plan">
+            <option value="Starter">Starter — $299 + $79/mo</option>
+            <option value="Pro" selected>Pro — $499 + $99/mo</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Stage</label>
+          <select id="f-status">
+            <option value="prospect">Prospect</option>
+            <option value="pitched">Pitched</option>
+            <option value="active">Active Client</option>
+            <option value="closed">Closed Won</option>
+            <option value="lost">Lost</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Follow-Up Date</label>
+          <input type="date" id="f-followup">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Website (current)</label>
+        <input type="text" id="f-website" placeholder="ladyontheroof.com">
+      </div>
+      <div class="form-group">
+        <label>Notes</label>
+        <textarea id="f-notes" placeholder="Key details, objections, what they care about..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal()">Cancel</button>
+      <button class="btn-primary" onclick="saveProspect()">Save Prospect</button>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL PANEL -->
+<div class="detail-panel" id="detailPanel">
+  <div class="dp-header">
+    <div class="dp-biz" id="dp-biz">—</div>
+    <button class="dp-close" onclick="closeDetail()">✕</button>
+  </div>
+  <div class="dp-body" id="dp-body"></div>
+</div>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────────────
+let prospects = JSON.parse(localStorage.getItem('medlock_crm') || '[]');
+let editingId = null;
+let currentView = 'pipeline';
+
+// Seed with Terri as first prospect
+if (prospects.length === 0) {
+  prospects = [{
+    id: Date.now(),
+    biz: 'Lady On The Roof®',
+    name: 'Terri Kruse',
+    phone: '(513) 231-0430',
+    email: 'sales@ladyontheroof.com',
+    industry: 'Roofing',
+    plan: 'Pro',
+    status: 'pitched',
+    website: 'ladyontheroof.com',
+    notes: '4.9★ Google, Fox19 featured, 12+ years. Demo built and ready. Follow up with The Knockout PDF.',
+    followup: new Date(Date.now() + 86400000).toISOString().split('T')[0],
+    added: new Date().toISOString(),
+  }];
+  save();
+}
+
+function save() {
+  localStorage.setItem('medlock_crm', JSON.stringify(prospects));
+}
+
+// ── STATS ────────────────────────────────────────────────────────────────────
+function updateStats() {
+  const active = prospects.filter(p => p.status === 'active');
+  const mrr = active.reduce((s, p) => s + (p.plan === 'Pro' ? 99 : 79), 0);
+  const setup = active.reduce((s, p) => s + (p.plan === 'Pro' ? 499 : 299), 0);
+  document.getElementById('statTotal').textContent = prospects.length;
+  document.getElementById('statPitched').textContent = prospects.filter(p => p.status === 'pitched').length;
+  document.getElementById('statActive').textContent = active.length;
+  document.getElementById('statMRR').textContent = '$' + mrr.toLocaleString();
+  document.getElementById('statSetup').textContent = '$' + setup.toLocaleString();
+}
+
+// ── RENDER ───────────────────────────────────────────────────────────────────
+function getFiltered() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const s = document.getElementById('filterStatus').value;
+  return prospects.filter(p => {
+    const matchQ = !q || p.biz.toLowerCase().includes(q) || (p.name||'').toLowerCase().includes(q);
+    const matchS = !s || p.status === s;
+    return matchQ && matchS;
+  });
+}
+
+function statusLabel(s) {
+  return { prospect: 'Prospect', pitched: 'Pitched', active: 'Active', closed: 'Closed', lost: 'Lost' }[s] || s;
+}
+
+function formatDate(str) {
+  if (!str) return '—';
+  return new Date(str).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
+}
+
+function render() {
+  updateStats();
+  const filtered = getFiltered();
+  if (currentView === 'pipeline') renderPipeline(filtered);
+  else renderTable(filtered);
+}
+
+function renderPipeline(data) {
+  const stages = ['prospect', 'pitched', 'active', 'closed'];
+  stages.forEach(stage => {
+    const items = data.filter(p => p.status === stage);
+    document.getElementById('cnt-' + stage).textContent = items.length;
+    const col = document.getElementById('col-' + stage);
+    if (items.length === 0) {
+      const emptyMsg = {
+        prospect: 'No targets yet.<br>Go find your next battle.',
+        pitched:  'No pitches out.<br>Get in the fight.',
+        active:   'No loyal clients yet.<br>Terri is waiting.',
+        closed:   'No victories yet.<br>Go earn one.',
+      }[stage] || 'Empty';
+      col.innerHTML = '<div class="empty-col"><div class="empty-col-t">' + emptyMsg + '</div></div>';
+      return;
+    }
+    col.innerHTML = items.map(p => `
+      <div class="pcard ${p.status}" onclick="openDetail(${p.id})">
+        <div class="pcard-biz">${p.biz}</div>
+        <div class="pcard-name">${p.name || '—'}</div>
+        <div class="pcard-meta">
+          <span class="pcard-industry">${p.industry || '—'}</span>
+          <span class="pcard-plan">${p.plan}</span>
+        </div>
+        ${p.notes ? `<div class="pcard-note">${p.notes}</div>` : ''}
+        ${p.followup ? `<div class="pcard-date" style="margin-top:8px;font-size:0.62rem;color:var(--blue);">⏰ Follow up ${formatDate(p.followup)}</div>` : ''}
+      </div>
+    `).join('');
+  });
+}
+
+function renderTable(data) {
+  const tbody = document.getElementById('tableBody');
+  if (data.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:32px;">No prospects found</td></tr>';
+    return;
+  }
+  tbody.innerHTML = data.map(p => `
+    <tr onclick="openDetail(${p.id})">
+      <td><strong style="color:var(--text);">${p.biz}</strong></td>
+      <td>${p.name || '—'}</td>
+      <td>${p.industry || '—'}</td>
+      <td><span class="plan-tag">${p.plan}</span></td>
+      <td><span class="status-pill s-${p.status}">${statusLabel(p.status)}</span></td>
+      <td style="color:var(--green);">${p.status === 'active' ? '$' + (p.plan === 'Pro' ? 99 : 79) + '/mo' : '—'}</td>
+      <td style="color:var(--muted);">${formatDate(p.added)}</td>
+      <td onclick="event.stopPropagation()">
+        <div class="action-btns">
+          <button class="action-btn" onclick="editProspect(${p.id})">Edit</button>
+          <button class="action-btn del" onclick="deleteProspect(${p.id})">Del</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// ── MODAL ────────────────────────────────────────────────────────────────────
+function openModal(id = null) {
+  editingId = id;
+  document.getElementById('modalTitle').textContent = id ? 'Edit Prospect' : 'New Prospect';
+  if (id) {
+    const p = prospects.find(x => x.id === id);
+    document.getElementById('f-biz').value = p.biz || '';
+    document.getElementById('f-name').value = p.name || '';
+    document.getElementById('f-phone').value = p.phone || '';
+    document.getElementById('f-email').value = p.email || '';
+    document.getElementById('f-industry').value = p.industry || '';
+    document.getElementById('f-plan').value = p.plan || 'Pro';
+    document.getElementById('f-status').value = p.status || 'prospect';
+    document.getElementById('f-website').value = p.website || '';
+    document.getElementById('f-notes').value = p.notes || '';
+    document.getElementById('f-followup').value = p.followup || '';
+  } else {
+    ['f-biz','f-name','f-phone','f-email','f-website','f-notes','f-followup'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-industry').value = '';
+    document.getElementById('f-plan').value = 'Pro';
+    document.getElementById('f-status').value = 'prospect';
+  }
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  editingId = null;
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function saveProspect() {
+  const biz = document.getElementById('f-biz').value.trim();
+  if (!biz) { document.getElementById('f-biz').focus(); return; }
+  const status = document.getElementById('f-status').value;
+  const data = {
+    biz, name: document.getElementById('f-name').value,
+    phone: document.getElementById('f-phone').value,
+    email: document.getElementById('f-email').value,
+    industry: document.getElementById('f-industry').value,
+    plan: document.getElementById('f-plan').value,
+    status: status === 'pitched' ? 'prospect' : status,
+    website: document.getElementById('f-website').value,
+    notes: document.getElementById('f-notes').value,
+    followup: document.getElementById('f-followup').value,
+  };
+  let savedId;
+  if (editingId) {
+    const i = prospects.findIndex(p => p.id === editingId);
+    prospects[i] = { ...prospects[i], ...data };
+    savedId = editingId;
+  } else {
+    savedId = Date.now();
+    prospects.push({ id: savedId, added: new Date().toISOString(), ...data });
+  }
+  save(); closeModal(); render();
+  // If they tried to set pitched, trigger the checklist
+  if (status === 'pitched') {
+    setTimeout(() => openChecklist(savedId), 300);
+  }
+}
+
+function editProspect(id) { openModal(id); }
+
+function deleteProspect(id) {
+  if (!confirm('Delete this prospect?')) return;
+  prospects = prospects.filter(p => p.id !== id);
+  save(); render();
+  if (document.getElementById('detailPanel').classList.contains('open')) closeDetail();
+}
+
+// ── DETAIL PANEL ─────────────────────────────────────────────────────────────
+function openDetail(id) {
+  const p = prospects.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('dp-biz').textContent = p.biz;
+  const mrr = p.status === 'active' ? (p.plan === 'Pro' ? 99 : 79) : 0;
+  const setup = p.plan === 'Pro' ? 499 : 299;
+  document.getElementById('dp-body').innerHTML = `
+    <div class="dp-section">
+      <div class="dp-sec-title">Stage</div>
+      <div class="stage-btns">
+        ${['prospect','pitched','active','closed','lost'].map(s => `
+          <button class="stage-btn ${p.status === s ? (s==='active'?'active-green':s==='closed'?'active-amber':'active') : ''}"
+            onclick="quickStatus(${id},'${s}')">${{prospect:'🎯 Target',pitched:'⚔️ Engaged',active:'🛡️ Loyal',closed:'🏆 Victory',lost:'💀 Lost'}[s]}</button>
+        `).join('')}
+      </div>
+    </div>
+    <div class="dp-section">
+      <div class="dp-sec-title">Contact</div>
+      <div class="dp-row"><span class="dp-key">Name</span><span class="dp-val">${p.name || '—'}</span></div>
+      <div class="dp-row"><span class="dp-key">Phone</span><span class="dp-val"><a href="tel:${p.phone}" style="color:var(--blue);text-decoration:none;">${p.phone || '—'}</a></span></div>
+      <div class="dp-row"><span class="dp-key">Email</span><span class="dp-val" style="font-size:0.76rem;">${p.email || '—'}</span></div>
+      <div class="dp-row"><span class="dp-key">Website</span><span class="dp-val" style="font-size:0.76rem;">${p.website || '—'}</span></div>
+    </div>
+    <div class="dp-section">
+      <div class="dp-sec-title">Deal</div>
+      <div class="dp-row"><span class="dp-key">Industry</span><span class="dp-val">${p.industry || '—'}</span></div>
+      <div class="dp-row"><span class="dp-key">Plan</span><span class="dp-val" style="color:var(--blue);">${p.plan}</span></div>
+      <div class="dp-row"><span class="dp-key">Setup Fee</span><span class="dp-val">$${setup}</span></div>
+      ${p.status === 'active' ? `<div class="dp-row"><span class="dp-key">MRR</span><div class="mrr-big">$${mrr}</div></div>` : ''}
+      <div class="dp-row"><span class="dp-key">Follow-Up</span><span class="dp-val" style="color:${p.followup ? 'var(--amber)' : 'var(--muted)'};">${formatDate(p.followup)}</span></div>
+      <div class="dp-row"><span class="dp-key">Added</span><span class="dp-val">${formatDate(p.added)}</span></div>
+    </div>
+    ${p.notes ? `<div class="dp-section"><div class="dp-sec-title">Notes</div><div class="dp-note">${p.notes}</div></div>` : ''}
+    <div style="display:flex;gap:8px;margin-top:16px;">
+      <button class="btn-primary" style="flex:1;" onclick="openModal(${id});closeDetail();">Edit</button>
+      <button class="btn-secondary" onclick="deleteProspect(${id})">Delete</button>
+    </div>
+  `;
+  document.getElementById('detailPanel').classList.add('open');
+}
+
+function closeDetail() {
+  document.getElementById('detailPanel').classList.remove('open');
+}
+
+function quickStatus(id, status) {
+  // Gate: if moving to pitched, run pre-pitch checklist
+  if (status === 'pitched') {
+    closeDetail();
+    openChecklist(id);
+    return;
+  }
+  const p = prospects.find(x => x.id === id);
+  if (p) { p.status = status; save(); render(); openDetail(id); }
+}
+
+// ── VIEW TOGGLE ───────────────────────────────────────────────────────────────
+function setView(v) {
+  currentView = v;
+  document.getElementById('pipelineView').style.display = v === 'pipeline' ? 'block' : 'none';
+  document.getElementById('tableView').style.display = v === 'table' ? 'block' : 'none';
+  document.getElementById('vt-pipeline').classList.toggle('active', v === 'pipeline');
+  document.getElementById('vt-table').classList.toggle('active', v === 'table');
+  render();
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+render();
+
+// ── LOGIN ─────────────────────────────────────────────────────────────────────
+const ACCESS_CODE = [109, 101, 100, 108, 111, 99, 107, 50, 48, 50, 53].map(function(c){return String.fromCharCode(c);}).join('');
+
+function attemptLogin() {
+  const input = document.getElementById('loginInput').value;
+  const error = document.getElementById('loginError');
+  if (input === ACCESS_CODE) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('appWrapper').style.display = 'block';
+    sessionStorage.setItem('medlock_auth', '1');
+    error.classList.remove('show');
+  } else {
+    error.classList.add('show');
+    document.getElementById('loginInput').value = '';
+    document.getElementById('loginInput').focus();
+    // Shake animation
+    const box = document.querySelector('.login-box');
+    box.style.transform = 'translateX(-8px)';
+    setTimeout(() => box.style.transform = 'translateX(8px)', 80);
+    setTimeout(() => box.style.transform = 'translateX(-4px)', 160);
+    setTimeout(() => box.style.transform = 'translateX(0)', 240);
+  }
+}
+
+// ── DATA BACKUP ──────────────────────────────────────────────────────────────
+function exportData() {
+  var data = {
+    exported: new Date().toISOString(),
+    prospects: JSON.parse(localStorage.getItem('medlock_crm') || '[]'),
+    entries:   JSON.parse(localStorage.getItem('medlock_pnl') || '[]'),
+  };
+  var blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  var url  = URL.createObjectURL(blob);
+  var a    = document.createElement('a');
+  a.href   = url;
+  a.download = 'medlock-backup-' + new Date().toISOString().split('T')[0] + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// Auto-login if already authenticated this session
+if (sessionStorage.getItem('medlock_auth') === '1') {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('appWrapper').style.display = 'block';
+}
+
+
+// ── PITCH CHECKLIST ───────────────────────────────────────────────────────────
+let checklistTargetId = null;
+let checkState = { demo: false, knockout: false };
+
+function openChecklist(prospectId) {
+  checklistTargetId = prospectId;
+  checkState = { demo: false, knockout: false };
+  // Reset UI
+  document.getElementById('chk-demo').classList.remove('checked');
+  document.getElementById('chk-knockout').classList.remove('checked');
+  updateCheckProgress();
+  document.getElementById('checklistOverlay').classList.add('open');
+}
+
+function closeChecklist() {
+  document.getElementById('checklistOverlay').classList.remove('open');
+  checklistTargetId = null;
+}
+
+function toggleCheck(key) {
+  checkState[key] = !checkState[key];
+  const el = document.getElementById('chk-' + key);
+  el.classList.toggle('checked', checkState[key]);
+  updateCheckProgress();
+}
+
+function updateCheckProgress() {
+  const done = Object.values(checkState).filter(Boolean).length;
+  const total = Object.keys(checkState).length;
+  const pct = (done / total) * 100;
+  document.getElementById('checkProgress').textContent = done + ' / ' + total;
+  document.getElementById('checkProgressBar').style.width = pct + '%';
+  const btn = document.getElementById('armBtn');
+  const warning = document.getElementById('checklistWarning');
+  if (done === total) {
+    btn.classList.add('ready');
+    btn.textContent = '⚔️ Armed & Ready — Engage';
+    warning.style.display = 'none';
+  } else {
+    btn.classList.remove('ready');
+    btn.textContent = '🔒 Locked — Complete Checklist';
+    warning.style.display = 'flex';
+  }
+}
+
+function confirmPitch() {
+  if (!checkState.demo || !checkState.knockout) return;
+  // Move prospect to pitched
+  const p = prospects.find(x => x.id === checklistTargetId);
+  if (p) {
+    p.status = 'pitched';
+    // Set follow-up to tomorrow
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    p.followup = tomorrow.toISOString().split('T')[0];
+    save();
+    render();
+    closeChecklist();
+    // Open the detail panel for this prospect
+    setTimeout(() => openDetail(checklistTargetId), 200);
+  }
+}
+
+
+// ── P&L DATA ─────────────────────────────────────────────────────────────────
+let entries = JSON.parse(localStorage.getItem('medlock_pnl') || '[]');
+let currentMonth = new Date();
+let entryType = 'income';
+let editingEntryId = null;
+
+const incomeCategories = ['Setup Fee','Monthly Retainer','Upgrade','Referral Bonus','Other Income'];
+const expenseCategories = ['Hosting','Domain','Software','Marketing','Tools','Misc'];
+
+function savePnl() { localStorage.setItem('medlock_pnl', JSON.stringify(entries)); }
+
+function changeMonth(dir) {
+  currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + dir, 1);
+  renderPnl();
+}
+
+function getMonthEntries() {
+  const y = currentMonth.getFullYear(), m = currentMonth.getMonth();
+  return entries.filter(e => {
+    const d = new Date(e.date);
+    return d.getFullYear() === y && d.getMonth() === m;
+  });
+}
+
+function renderPnl() {
+  // Month display
+  document.getElementById('monthDisplay').textContent =
+    currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).toUpperCase();
+
+  const monthly = getMonthEntries();
+  const income = monthly.filter(e => e.type === 'income');
+  const expenses = monthly.filter(e => e.type === 'expense');
+  const totalInc = income.reduce((s,e) => s + e.amount, 0);
+  const totalExp = expenses.reduce((s,e) => s + e.amount, 0);
+  const profit = totalInc - totalExp;
+  const margin = totalInc > 0 ? Math.round((profit / totalInc) * 100) : 0;
+
+  document.getElementById('pnl-income').textContent = '$' + totalInc.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  document.getElementById('pnl-income-sub').textContent = income.length + ' entr' + (income.length===1?'y':'ies') + ' this month';
+  document.getElementById('pnl-expense').textContent = '$' + totalExp.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  document.getElementById('pnl-expense-sub').textContent = expenses.length + ' entr' + (expenses.length===1?'y':'ies') + ' this month';
+  document.getElementById('pnl-profit').textContent = (profit >= 0 ? '$' : '-$') + Math.abs(profit).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  document.getElementById('pnl-profit').className = 'pnl-card-num ' + (profit >= 0 ? 'green' : 'red');
+  document.getElementById('pnl-margin').textContent = margin + '% margin';
+  document.getElementById('pnl-bar-pct').textContent = margin + '%';
+  document.getElementById('pnl-bar-fill').style.width = Math.min(Math.max(margin, 0), 100) + '%';
+
+  // Income table
+  const ib = document.getElementById('incomeBody');
+  if (income.length === 0) {
+    ib.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px;">No income this month — go close some deals 💪</td></tr>';
+  } else {
+    ib.innerHTML = income.sort((a,b) => new Date(b.date)-new Date(a.date)).map(e => `
+      <tr>
+        <td style="color:var(--muted);">${formatDate(e.date)}</td>
+        <td><strong style="color:var(--text);">${e.desc}</strong></td>
+        <td><span class="cat-pill">${e.cat || '—'}</span></td>
+        <td style="color:var(--muted);">${e.client || '—'}</td>
+        <td class="amount-inc">+$${e.amount.toLocaleString('en-US', {minimumFractionDigits:2})}</td>
+        <td><button class="del-entry" onclick="deleteEntry(${e.id})">✕</button></td>
+      </tr>
+    `).join('');
+  }
+
+  // Expense table
+  const eb = document.getElementById('expenseBody');
+  if (expenses.length === 0) {
+    eb.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:20px;">No expenses this month</td></tr>';
+  } else {
+    eb.innerHTML = expenses.sort((a,b) => new Date(b.date)-new Date(a.date)).map(e => `
+      <tr>
+        <td style="color:var(--muted);">${formatDate(e.date)}</td>
+        <td><strong style="color:var(--text);">${e.desc}</strong></td>
+        <td><span class="cat-pill">${e.cat || '—'}</span></td>
+        <td class="amount-exp">-$${e.amount.toLocaleString('en-US', {minimumFractionDigits:2})}</td>
+        <td><button class="del-entry" onclick="deleteEntry(${e.id})">✕</button></td>
+      </tr>
+    `).join('');
+  }
+}
+
+function openEntryModal(type) {
+  entryType = type;
+  editingEntryId = null;
+  document.getElementById('entryModalTitle').textContent = type === 'income' ? 'Add Income' : 'Add Expense';
+  document.getElementById('e-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('e-amount').value = '';
+  document.getElementById('e-desc').value = '';
+  document.getElementById('e-client').value = '';
+  const cats = type === 'income' ? incomeCategories : expenseCategories;
+  document.getElementById('e-cat').innerHTML = '<option value="">Select...</option>' +
+    cats.map(c => `<option>${c}</option>`).join('');
+  document.getElementById('e-client-wrap').style.display = type === 'income' ? 'block' : 'none';
+  document.getElementById('entryModalOverlay').classList.add('open');
+}
+
+function closeEntryModal() {
+  document.getElementById('entryModalOverlay').classList.remove('open');
+}
+
+function closeEntryModalOutside(e) {
+  if (e.target === document.getElementById('entryModalOverlay')) closeEntryModal();
+}
+
+function saveEntry() {
+  const date = document.getElementById('e-date').value;
+  const amount = parseFloat(document.getElementById('e-amount').value);
+  const desc = document.getElementById('e-desc').value.trim();
+  if (!date || !amount || !desc) return;
+  entries.push({
+    id: Date.now(), type: entryType, date, amount,
+    desc, cat: document.getElementById('e-cat').value,
+    client: document.getElementById('e-client').value,
+  });
+  savePnl(); closeEntryModal(); renderPnl();
+}
+
+function deleteEntry(id) {
+  if (!confirm('Delete this entry?')) return;
+  entries = entries.filter(e => e.id !== id);
+  savePnl(); renderPnl();
+}
+
+// ── TAB SWITCHING ─────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  try {
+    const isCrm = tab === 'crm';
+    document.getElementById('tab-crm').classList.toggle('active', isCrm);
+    document.getElementById('tab-pnl').classList.toggle('active', !isCrm);
+    document.getElementById('statsBar').style.display = isCrm ? 'grid' : 'none';
+    document.getElementById('crmMain').style.display = isCrm ? 'block' : 'none';
+    document.getElementById('pnlView').style.display = isCrm ? 'none' : 'block';
+    document.getElementById('mainAddBtn').style.display = isCrm ? 'flex' : 'none';
+    document.getElementById('logoSub').textContent = isCrm ? 'The Coliseum' : 'Financial Command Center';
+    if (!isCrm) renderPnl();
+  } catch(e) { console.error('switchTab error:', e); }
+}
+
+// Init P&L month display safely
+try {
+  const md = document.getElementById('monthDisplay');
+  if (md) md.textContent = currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).toUpperCase();
+} catch(e) {}
+
+</script>
+
+<!-- P&L VIEW -->
+<div id="pnlView" style="display:none;padding:24px;position:relative;z-index:1;">
+
+  <!-- MONTH SELECTOR -->
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
+    <div class="month-selector">
+      <button class="month-btn" onclick="changeMonth(-1)">◀</button>
+      <div class="month-display" id="monthDisplay"></div>
+      <button class="month-btn" onclick="changeMonth(1)">▶</button>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="add-entry-btn" onclick="openEntryModal('income')">+ Income</button>
+      <button class="add-entry-btn" onclick="openEntryModal('expense')">+ Expense</button>
+      <button class="add-entry-btn" onclick="exportData()" style="color:var(--green);border-color:var(--green);">↓ Backup</button>
+    </div>
+  </div>
+
+  <!-- SUMMARY CARDS -->
+  <div class="pnl-grid">
+    <div class="pnl-card income">
+      <div class="pnl-card-label">Total Income</div>
+      <div class="pnl-card-num green" id="pnl-income">$0</div>
+      <div class="pnl-card-sub" id="pnl-income-sub">0 entries this month</div>
+    </div>
+    <div class="pnl-card expense">
+      <div class="pnl-card-label">Total Expenses</div>
+      <div class="pnl-card-num red" id="pnl-expense">$0</div>
+      <div class="pnl-card-sub" id="pnl-expense-sub">0 entries this month</div>
+    </div>
+    <div class="pnl-card profit">
+      <div class="pnl-card-label">Net Profit</div>
+      <div class="pnl-card-num blue" id="pnl-profit">$0</div>
+      <div class="pnl-card-sub" id="pnl-margin">0% margin</div>
+    </div>
+  </div>
+
+  <!-- PROFIT BAR -->
+  <div class="profit-bar-wrap">
+    <div class="profit-bar-label">
+      <div class="profit-bar-title">Profit Margin</div>
+      <div class="profit-bar-pct" id="pnl-bar-pct">0%</div>
+    </div>
+    <div class="profit-bar-track">
+      <div class="profit-bar-fill" id="pnl-bar-fill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- INCOME TABLE -->
+  <div class="pnl-section">
+    <div class="pnl-sec-header">
+      <div class="pnl-sec-title">Income</div>
+    </div>
+    <table class="pnl-table">
+      <thead>
+        <tr>
+          <th>Date</th><th>Description</th><th>Category</th><th>Client</th><th>Amount</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="incomeBody"></tbody>
+    </table>
+  </div>
+
+  <!-- EXPENSE TABLE -->
+  <div class="pnl-section">
+    <div class="pnl-sec-header">
+      <div class="pnl-sec-title">Expenses</div>
+    </div>
+    <table class="pnl-table">
+      <thead>
+        <tr>
+          <th>Date</th><th>Description</th><th>Category</th><th>Amount</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="expenseBody"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ENTRY MODAL -->
+<div class="modal-overlay" id="entryModalOverlay" onclick="closeEntryModalOutside(event)">
+  <div class="modal" style="max-width:440px;">
+    <div class="modal-header">
+      <div class="modal-title" id="entryModalTitle">Add Income</div>
+      <button class="modal-close" onclick="closeEntryModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date *</label>
+          <input type="date" id="e-date">
+        </div>
+        <div class="form-group">
+          <label>Amount ($) *</label>
+          <input type="number" id="e-amount" placeholder="499" min="0" step="0.01">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Description *</label>
+        <input type="text" id="e-desc" placeholder="Pro setup fee — Lady On The Roof">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Category</label>
+          <select id="e-cat">
+            <option value="">Select...</option>
+          </select>
+        </div>
+        <div class="form-group" id="e-client-wrap">
+          <label>Client (optional)</label>
+          <input type="text" id="e-client" placeholder="Business name">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeEntryModal()">Cancel</button>
+      <button class="btn-primary" onclick="saveEntry()">Save</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- PITCH READINESS CHECKLIST MODAL -->
+<div class="checklist-overlay" id="checklistOverlay">
+  <div class="checklist-modal">
+    <div class="checklist-header">
+      <div class="checklist-pretitle">⚔️ Pre-Pitch Protocol</div>
+      <div class="checklist-title">ARM BEFORE<br>YOU ENGAGE</div>
+      <div class="checklist-sub">Both weapons must be loaded before this prospect enters the arena as pitched.</div>
+    </div>
+
+    <div style="padding:20px 24px 0;">
+      <div class="checklist-warning" id="checklistWarning">
+        <div class="checklist-warning-icon">🔒</div>
+        <div class="checklist-warning-text">Complete all items below to unlock the pitch. No half-measures — go in fully armed.</div>
+      </div>
+    </div>
+
+    <div class="progress-label">
+      <span class="progress-label-text">Readiness</span>
+      <span class="progress-label-count" id="checkProgress">0 / 2</span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="checkProgressBar"></div></div>
+
+    <div class="checklist-body">
+      <div class="check-item" id="chk-demo" onclick="toggleCheck('demo')">
+        <div class="check-box"><span class="check-icon">✓</span></div>
+        <div class="check-content">
+          <div class="check-title">🏠 Demo Site Is Built & Ready</div>
+          <div class="check-desc">A full custom demo site has been built for this prospect using their real branding, photos, and business info. Preview URL is ready to send.</div>
+        </div>
+      </div>
+      <div class="check-item" id="chk-knockout" onclick="toggleCheck('knockout')">
+        <div class="check-box"><span class="check-icon">✓</span></div>
+        <div class="check-content">
+          <div class="check-title">🥊 The Knockout PDF Is Prepared</div>
+          <div class="check-desc">The Knockout has been customized for this prospect — competitor comparison, their specific wins, and pricing breakdown are all ready to deploy.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="checklist-footer">
+      <button class="btn-secondary" onclick="closeChecklist()">Not Yet</button>
+      <button class="btn-arm" id="armBtn" onclick="confirmPitch()">🔒 Locked — Complete Checklist</button>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+</div>
+<script>
+(function(){
+
+  // ── DESKTOP: type "command" ──────────────────────────────────────────
+  var buf='', SECRET=[99, 111, 109, 109, 97, 110, 100].map(function(c){return String.fromCharCode(c);}).join('');
+  document.addEventListener('keydown', function(e){
+    var t = e.target.tagName;
+    if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT') return;
+    buf += e.key.toLowerCase();
+    if(buf.length > SECRET.length) buf = buf.slice(-SECRET.length);
+    if(buf === SECRET){ buf=''; toggle(); }
+  });
+
+  // ── MOBILE METHOD 1: Tap zone bottom-right ───────────────────────────
+  var zone = document.createElement('div');
+  zone.style.cssText = 'position:fixed;bottom:0;right:0;width:120px;height:120px;z-index:8998;-webkit-tap-highlight-color:transparent;touch-action:manipulation;';
+  document.body.appendChild(zone);
+  var taps=0, tapTimer=null;
+  function registerTap(){
+    taps++;
+    clearTimeout(tapTimer);
+    tapTimer = setTimeout(function(){ taps=0; }, 1200);
+    if(taps >= 3){ taps=0; toggle(); }
+  }
+  zone.addEventListener('touchstart', function(e){ e.preventDefault(); registerTap(); }, {passive:false});
+  zone.addEventListener('click', registerTap);
+
+  // ── MOBILE METHOD 2: Shake detection ────────────────────────────────
+  var shakeCount=0, lastShake=0, lastX=null, lastY=null, lastZ=null;
+  if(window.DeviceMotionEvent){
+    window.addEventListener('devicemotion', function(e){
+      var a = e.accelerationIncludingGravity;
+      if(!a) return;
+      if(lastX === null){ lastX=a.x; lastY=a.y; lastZ=a.z; return; }
+      var dx=Math.abs(a.x-lastX), dy=Math.abs(a.y-lastY), dz=Math.abs(a.z-lastZ);
+      lastX=a.x; lastY=a.y; lastZ=a.z;
+      if(dx+dy+dz > 25){
+        var now = Date.now();
+        if(now - lastShake > 500){
+          lastShake = now;
+          shakeCount++;
+          if(shakeCount >= 3){ shakeCount=0; toggle(); }
+          setTimeout(function(){ shakeCount=0; }, 3000);
+        }
+      }
+    });
+  }
+
+  // ── MOBILE METHOD 3: Long press on MEDLOCK logo ──────────────────────
+  var logo = null;
+  document.addEventListener('DOMContentLoaded', function(){
+    logo = document.querySelector('.logo-text') || document.querySelector('.logo') || document.querySelector('nav .logo');
+  });
+  var pressTimer = null;
+  document.addEventListener('touchstart', function(e){
+    var el = e.target.closest ? e.target.closest('[class*="logo"]') : null;
+    if(!el) return;
+    pressTimer = setTimeout(function(){ toggle(); }, 1500);
+  });
+  document.addEventListener('touchend', function(){ clearTimeout(pressTimer); });
+  document.addEventListener('touchmove', function(){ clearTimeout(pressTimer); });
+
+  function toggle(){
+    var el = document.getElementById('crmBackend');
+    if(!el) return;
+    el.classList.toggle('visible');
+    if(el.classList.contains('visible') && sessionStorage.getItem('medlock_auth') !== '1'){
+      setTimeout(function(){
+        var inp = document.getElementById('loginInput');
+        if(inp){ inp.focus(); }
+      }, 200);
+    }
+  }
+
+})();
+</script>
+<script>
+(function(){
+'use strict';
+
+// ── DATA ─────────────────────────────────────────────────────────────────────
+let prospects = JSON.parse(localStorage.getItem('medlock_crm') || '[]');
+let editingId = null;
+let currentView = 'pipeline';
+
+// Seed with Terri as first prospect
+if (prospects.length === 0) {
+  prospects = [{
+    id: Date.now(),
+    biz: 'Lady On The Roof®',
+    name: 'Terri Kruse',
+    phone: '(513) 231-0430',
+    email: 'sales@ladyontheroof.com',
+    industry: 'Roofing',
+    plan: 'Pro',
+    status: 'pitched',
+    website: 'ladyontheroof.com',
+    notes: '4.9★ Google, Fox19 featured, 12+ years. Demo built and ready. Follow up with The Knockout PDF.',
+    followup: new Date(Date.now() + 86400000).toISOString().split('T')[0],
+    added: new Date().toISOString(),
+  }];
+  save();
+}
+
+function save() {
+  localStorage.setItem('medlock_crm', JSON.stringify(prospects));
+}
+
+// ── STATS ────────────────────────────────────────────────────────────────────
+function updateStats() {
+  const active = prospects.filter(p => p.status === 'active');
+  const mrr = active.reduce((s, p) => s + (p.plan === 'Pro' ? 99 : 79), 0);
+  const setup = active.reduce((s, p) => s + (p.plan === 'Pro' ? 499 : 299), 0);
+  document.getElementById('statTotal').textContent = prospects.length;
+  document.getElementById('statPitched').textContent = prospects.filter(p => p.status === 'pitched').length;
+  document.getElementById('statActive').textContent = active.length;
+  document.getElementById('statMRR').textContent = '$' + mrr.toLocaleString();
+  document.getElementById('statSetup').textContent = '$' + setup.toLocaleString();
+}
+
+// ── RENDER ───────────────────────────────────────────────────────────────────
+function getFiltered() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const s = document.getElementById('filterStatus').value;
+  return prospects.filter(p => {
+    const matchQ = !q || p.biz.toLowerCase().includes(q) || (p.name||'').toLowerCase().includes(q);
+    const matchS = !s || p.status === s;
+    return matchQ && matchS;
+  });
+}
+
+function statusLabel(s) {
+  return { prospect: 'Prospect', pitched: 'Pitched', active: 'Active', closed: 'Closed', lost: 'Lost' }[s] || s;
+}
+
+function formatDate(str) {
+  if (!str) return '—';
+  return new Date(str).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: '2-digit' });
+}
+
+function render() {
+  updateStats();
+  const filtered = getFiltered();
+  if (currentView === 'pipeline') renderPipeline(filtered);
+  else renderTable(filtered);
+}
+
+function renderPipeline(data) {
+  const stages = ['prospect', 'pitched', 'active', 'closed'];
+  stages.forEach(stage => {
+    const items = data.filter(p => p.status === stage);
+    document.getElementById('cnt-' + stage).textContent = items.length;
+    const col = document.getElementById('col-' + stage);
+    if (items.length === 0) {
+      const emptyMsg = {
+        prospect: 'No targets yet.<br>Go find your next battle.',
+        pitched:  'No pitches out.<br>Get in the fight.',
+        active:   'No loyal clients yet.<br>Terri is waiting.',
+        closed:   'No victories yet.<br>Go earn one.',
+      }[stage] || 'Empty';
+      col.innerHTML = '<div class="empty-col"><div class="empty-col-t">' + emptyMsg + '</div></div>';
+      return;
+    }
+    col.innerHTML = items.map(p => `
+      <div class="pcard ${p.status}" onclick="openDetail(${p.id})">
+        <div class="pcard-biz">${p.biz}</div>
+        <div class="pcard-name">${p.name || '—'}</div>
+        <div class="pcard-meta">
+          <span class="pcard-industry">${p.industry || '—'}</span>
+          <span class="pcard-plan">${p.plan}</span>
+        </div>
+        ${p.notes ? `<div class="pcard-note">${p.notes}</div>` : ''}
+        ${p.followup ? `<div class="pcard-date" style="margin-top:8px;font-size:0.62rem;color:var(--blue);">⏰ Follow up ${formatDate(p.followup)}</div>` : ''}
+      </div>
+    `).join('');
+  });
+}
+
+function renderTable(data) {
+  const tbody = document.getElementById('tableBody');
+  if (data.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:32px;">No prospects found</td></tr>';
+    return;
+  }
+  tbody.innerHTML = data.map(p => `
+    <tr onclick="openDetail(${p.id})">
+      <td><strong style="color:var(--text);">${p.biz}</strong></td>
+      <td>${p.name || '—'}</td>
+      <td>${p.industry || '—'}</td>
+      <td><span class="plan-tag">${p.plan}</span></td>
+      <td><span class="status-pill s-${p.status}">${statusLabel(p.status)}</span></td>
+      <td style="color:var(--green);">${p.status === 'active' ? '$' + (p.plan === 'Pro' ? 99 : 79) + '/mo' : '—'}</td>
+      <td style="color:var(--muted);">${formatDate(p.added)}</td>
+      <td onclick="event.stopPropagation()">
+        <div class="action-btns">
+          <button class="action-btn" onclick="editProspect(${p.id})">Edit</button>
+          <button class="action-btn del" onclick="deleteProspect(${p.id})">Del</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// ── MODAL ────────────────────────────────────────────────────────────────────
+function openModal(id = null) {
+  editingId = id;
+  document.getElementById('modalTitle').textContent = id ? 'Edit Prospect' : 'New Prospect';
+  if (id) {
+    const p = prospects.find(x => x.id === id);
+    document.getElementById('f-biz').value = p.biz || '';
+    document.getElementById('f-name').value = p.name || '';
+    document.getElementById('f-phone').value = p.phone || '';
+    document.getElementById('f-email').value = p.email || '';
+    document.getElementById('f-industry').value = p.industry || '';
+    document.getElementById('f-plan').value = p.plan || 'Pro';
+    document.getElementById('f-status').value = p.status || 'prospect';
+    document.getElementById('f-website').value = p.website || '';
+    document.getElementById('f-notes').value = p.notes || '';
+    document.getElementById('f-followup').value = p.followup || '';
+  } else {
+    ['f-biz','f-name','f-phone','f-email','f-website','f-notes','f-followup'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('f-industry').value = '';
+    document.getElementById('f-plan').value = 'Pro';
+    document.getElementById('f-status').value = 'prospect';
+  }
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  editingId = null;
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModal();
+}
+
+function saveProspect() {
+  const biz = document.getElementById('f-biz').value.trim();
+  if (!biz) { document.getElementById('f-biz').focus(); return; }
+  const status = document.getElementById('f-status').value;
+  const data = {
+    biz, name: document.getElementById('f-name').value,
+    phone: document.getElementById('f-phone').value,
+    email: document.getElementById('f-email').value,
+    industry: document.getElementById('f-industry').value,
+    plan: document.getElementById('f-plan').value,
+    status: status === 'pitched' ? 'prospect' : status,
+    website: document.getElementById('f-website').value,
+    notes: document.getElementById('f-notes').value,
+    followup: document.getElementById('f-followup').value,
+  };
+  let savedId;
+  if (editingId) {
+    const i = prospects.findIndex(p => p.id === editingId);
+    prospects[i] = { ...prospects[i], ...data };
+    savedId = editingId;
+  } else {
+    savedId = Date.now();
+    prospects.push({ id: savedId, added: new Date().toISOString(), ...data });
+  }
+  save(); closeModal(); render();
+  // If they tried to set pitched, trigger the checklist
+  if (status === 'pitched') {
+    setTimeout(() => openChecklist(savedId), 300);
+  }
+}
+
+function editProspect(id) { openModal(id); }
+
+function deleteProspect(id) {
+  if (!confirm('Delete this prospect?')) return;
+  prospects = prospects.filter(p => p.id !== id);
+  save(); render();
+  if (document.getElementById('detailPanel').classList.contains('open')) closeDetail();
+}
+
+// ── DETAIL PANEL ─────────────────────────────────────────────────────────────
+function openDetail(id) {
+  const p = prospects.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('dp-biz').textContent = p.biz;
+  const mrr = p.status === 'active' ? (p.plan === 'Pro' ? 99 : 79) : 0;
+  const setup = p.plan === 'Pro' ? 499 : 299;
+  document.getElementById('dp-body').innerHTML = `
+    <div class="dp-section">
+      <div class="dp-sec-title">Stage</div>
+      <div class="stage-btns">
+        ${['prospect','pitched','active','closed','lost'].map(s => `
+          <button class="stage-btn ${p.status === s ? (s==='active'?'active-green':s==='closed'?'active-amber':'active') : ''}"
+            onclick="quickStatus(${id},'${s}')">${{prospect:'🎯 Target',pitched:'⚔️ Engaged',active:'🛡️ Loyal',closed:'🏆 Victory',lost:'💀 Lost'}[s]}</button>
+        `).join('')}
+      </div>
+    </div>
+    <div class="dp-section">
+      <div class="dp-sec-title">Contact</div>
+      <div class="dp-row"><span class="dp-key">Name</span><span class="dp-val">${p.name || '—'}</span></div>
+      <div class="dp-row"><span class="dp-key">Phone</span><span class="dp-val"><a href="tel:${p.phone}" style="color:var(--blue);text-decoration:none;">${p.phone || '—'}</a></span></div>
+      <div class="dp-row"><span class="dp-key">Email</span><span class="dp-val" style="font-size:0.76rem;">${p.email || '—'}</span></div>
+      <div class="dp-row"><span class="dp-key">Website</span><span class="dp-val" style="font-size:0.76rem;">${p.website || '—'}</span></div>
+    </div>
+    <div class="dp-section">
+      <div class="dp-sec-title">Deal</div>
+      <div class="dp-row"><span class="dp-key">Industry</span><span class="dp-val">${p.industry || '—'}</span></div>
+      <div class="dp-row"><span class="dp-key">Plan</span><span class="dp-val" style="color:var(--blue);">${p.plan}</span></div>
+      <div class="dp-row"><span class="dp-key">Setup Fee</span><span class="dp-val">$${setup}</span></div>
+      ${p.status === 'active' ? `<div class="dp-row"><span class="dp-key">MRR</span><div class="mrr-big">$${mrr}</div></div>` : ''}
+      <div class="dp-row"><span class="dp-key">Follow-Up</span><span class="dp-val" style="color:${p.followup ? 'var(--amber)' : 'var(--muted)'};">${formatDate(p.followup)}</span></div>
+      <div class="dp-row"><span class="dp-key">Added</span><span class="dp-val">${formatDate(p.added)}</span></div>
+    </div>
+    ${p.notes ? `<div class="dp-section"><div class="dp-sec-title">Notes</div><div class="dp-note">${p.notes}</div></div>` : ''}
+    <div style="display:flex;gap:8px;margin-top:16px;">
+      <button class="btn-primary" style="flex:1;" onclick="openModal(${id});closeDetail();">Edit</button>
+      <button class="btn-secondary" onclick="deleteProspect(${id})">Delete</button>
+    </div>
+  `;
+  document.getElementById('detailPanel').classList.add('open');
+}
+
+function closeDetail() {
+  document.getElementById('detailPanel').classList.remove('open');
+}
+
+function quickStatus(id, status) {
+  // Gate: if moving to pitched, run pre-pitch checklist
+  if (status === 'pitched') {
+    closeDetail();
+    openChecklist(id);
+    return;
+  }
+  const p = prospects.find(x => x.id === id);
+  if (p) { p.status = status; save(); render(); openDetail(id); }
+}
+
+// ── VIEW TOGGLE ───────────────────────────────────────────────────────────────
+function setView(v) {
+  currentView = v;
+  document.getElementById('pipelineView').style.display = v === 'pipeline' ? 'block' : 'none';
+  document.getElementById('tableView').style.display = v === 'table' ? 'block' : 'none';
+  document.getElementById('vt-pipeline').classList.toggle('active', v === 'pipeline');
+  document.getElementById('vt-table').classList.toggle('active', v === 'table');
+  render();
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+render();
+
+// ── LOGIN ─────────────────────────────────────────────────────────────────────
+const ACCESS_CODE = [109, 101, 100, 108, 111, 99, 107, 50, 48, 50, 53].map(function(c){return String.fromCharCode(c);}).join('');
+
+function attemptLogin() {
+  const input = document.getElementById('loginInput').value;
+  const error = document.getElementById('loginError');
+  if (input === ACCESS_CODE) {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('appWrapper').style.display = 'block';
+    sessionStorage.setItem('medlock_auth', '1');
+    error.classList.remove('show');
+  } else {
+    error.classList.add('show');
+    document.getElementById('loginInput').value = '';
+    document.getElementById('loginInput').focus();
+    // Shake animation
+    const box = document.querySelector('.login-box');
+    box.style.transform = 'translateX(-8px)';
+    setTimeout(() => box.style.transform = 'translateX(8px)', 80);
+    setTimeout(() => box.style.transform = 'translateX(-4px)', 160);
+    setTimeout(() => box.style.transform = 'translateX(0)', 240);
+  }
+}
+
+// ── DATA BACKUP ──────────────────────────────────────────────────────────────
+function exportData() {
+  var data = {
+    exported: new Date().toISOString(),
+    prospects: JSON.parse(localStorage.getItem('medlock_crm') || '[]'),
+    entries:   JSON.parse(localStorage.getItem('medlock_pnl') || '[]'),
+  };
+  var blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  var url  = URL.createObjectURL(blob);
+  var a    = document.createElement('a');
+  a.href   = url;
+  a.download = 'medlock-backup-' + new Date().toISOString().split('T')[0] + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// Auto-login if already authenticated this session
+if (sessionStorage.getItem('medlock_auth') === '1') {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('appWrapper').style.display = 'block';
+}
+
+
+// ── PITCH CHECKLIST ───────────────────────────────────────────────────────────
+let checklistTargetId = null;
+let checkState = { demo: false, knockout: false };
+
+function openChecklist(prospectId) {
+  checklistTargetId = prospectId;
+  checkState = { demo: false, knockout: false };
+  // Reset UI
+  document.getElementById('chk-demo').classList.remove('checked');
+  document.getElementById('chk-knockout').classList.remove('checked');
+  updateCheckProgress();
+  document.getElementById('checklistOverlay').classList.add('open');
+}
+
+function closeChecklist() {
+  document.getElementById('checklistOverlay').classList.remove('open');
+  checklistTargetId = null;
+}
+
+function toggleCheck(key) {
+  checkState[key] = !checkState[key];
+  const el = document.getElementById('chk-' + key);
+  el.classList.toggle('checked', checkState[key]);
+  updateCheckProgress();
+}
+
+function updateCheckProgress() {
+  const done = Object.values(checkState).filter(Boolean).length;
+  const total = Object.keys(checkState).length;
+  const pct = (done / total) * 100;
+  document.getElementById('checkProgress').textContent = done + ' / ' + total;
+  document.getElementById('checkProgressBar').style.width = pct + '%';
+  const btn = document.getElementById('armBtn');
+  const warning = document.getElementById('checklistWarning');
+  if (done === total) {
+    btn.classList.add('ready');
+    btn.textContent = '⚔️ Armed & Ready — Engage';
+    warning.style.display = 'none';
+  } else {
+    btn.classList.remove('ready');
+    btn.textContent = '🔒 Locked — Complete Checklist';
+    warning.style.display = 'flex';
+  }
+}
+
+function confirmPitch() {
+  if (!checkState.demo || !checkState.knockout) return;
+  // Move prospect to pitched
+  const p = prospects.find(x => x.id === checklistTargetId);
+  if (p) {
+    p.status = 'pitched';
+    // Set follow-up to tomorrow
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    p.followup = tomorrow.toISOString().split('T')[0];
+    save();
+    render();
+    closeChecklist();
+    // Open the detail panel for this prospect
+    setTimeout(() => openDetail(checklistTargetId), 200);
+  }
+}
+
+
+// ── P&L DATA ─────────────────────────────────────────────────────────────────
+let entries = JSON.parse(localStorage.getItem('medlock_pnl') || '[]');
+let currentMonth = new Date();
+let entryType = 'income';
+let editingEntryId = null;
+
+const incomeCategories = ['Setup Fee','Monthly Retainer','Upgrade','Referral Bonus','Other Income'];
+const expenseCategories = ['Hosting','Domain','Software','Marketing','Tools','Misc'];
+
+function savePnl() { localStorage.setItem('medlock_pnl', JSON.stringify(entries)); }
+
+function changeMonth(dir) {
+  currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + dir, 1);
+  renderPnl();
+}
+
+function getMonthEntries() {
+  const y = currentMonth.getFullYear(), m = currentMonth.getMonth();
+  return entries.filter(e => {
+    const d = new Date(e.date);
+    return d.getFullYear() === y && d.getMonth() === m;
+  });
+}
+
+function renderPnl() {
+  // Month display
+  document.getElementById('monthDisplay').textContent =
+    currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).toUpperCase();
+
+  const monthly = getMonthEntries();
+  const income = monthly.filter(e => e.type === 'income');
+  const expenses = monthly.filter(e => e.type === 'expense');
+  const totalInc = income.reduce((s,e) => s + e.amount, 0);
+  const totalExp = expenses.reduce((s,e) => s + e.amount, 0);
+  const profit = totalInc - totalExp;
+  const margin = totalInc > 0 ? Math.round((profit / totalInc) * 100) : 0;
+
+  document.getElementById('pnl-income').textContent = '$' + totalInc.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  document.getElementById('pnl-income-sub').textContent = income.length + ' entr' + (income.length===1?'y':'ies') + ' this month';
+  document.getElementById('pnl-expense').textContent = '$' + totalExp.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  document.getElementById('pnl-expense-sub').textContent = expenses.length + ' entr' + (expenses.length===1?'y':'ies') + ' this month';
+  document.getElementById('pnl-profit').textContent = (profit >= 0 ? '$' : '-$') + Math.abs(profit).toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+  document.getElementById('pnl-profit').className = 'pnl-card-num ' + (profit >= 0 ? 'green' : 'red');
+  document.getElementById('pnl-margin').textContent = margin + '% margin';
+  document.getElementById('pnl-bar-pct').textContent = margin + '%';
+  document.getElementById('pnl-bar-fill').style.width = Math.min(Math.max(margin, 0), 100) + '%';
+
+  // Income table
+  const ib = document.getElementById('incomeBody');
+  if (income.length === 0) {
+    ib.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px;">No income this month — go close some deals 💪</td></tr>';
+  } else {
+    ib.innerHTML = income.sort((a,b) => new Date(b.date)-new Date(a.date)).map(e => `
+      <tr>
+        <td style="color:var(--muted);">${formatDate(e.date)}</td>
+        <td><strong style="color:var(--text);">${e.desc}</strong></td>
+        <td><span class="cat-pill">${e.cat || '—'}</span></td>
+        <td style="color:var(--muted);">${e.client || '—'}</td>
+        <td class="amount-inc">+$${e.amount.toLocaleString('en-US', {minimumFractionDigits:2})}</td>
+        <td><button class="del-entry" onclick="deleteEntry(${e.id})">✕</button></td>
+      </tr>
+    `).join('');
+  }
+
+  // Expense table
+  const eb = document.getElementById('expenseBody');
+  if (expenses.length === 0) {
+    eb.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:20px;">No expenses this month</td></tr>';
+  } else {
+    eb.innerHTML = expenses.sort((a,b) => new Date(b.date)-new Date(a.date)).map(e => `
+      <tr>
+        <td style="color:var(--muted);">${formatDate(e.date)}</td>
+        <td><strong style="color:var(--text);">${e.desc}</strong></td>
+        <td><span class="cat-pill">${e.cat || '—'}</span></td>
+        <td class="amount-exp">-$${e.amount.toLocaleString('en-US', {minimumFractionDigits:2})}</td>
+        <td><button class="del-entry" onclick="deleteEntry(${e.id})">✕</button></td>
+      </tr>
+    `).join('');
+  }
+}
+
+function openEntryModal(type) {
+  entryType = type;
+  editingEntryId = null;
+  document.getElementById('entryModalTitle').textContent = type === 'income' ? 'Add Income' : 'Add Expense';
+  document.getElementById('e-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('e-amount').value = '';
+  document.getElementById('e-desc').value = '';
+  document.getElementById('e-client').value = '';
+  const cats = type === 'income' ? incomeCategories : expenseCategories;
+  document.getElementById('e-cat').innerHTML = '<option value="">Select...</option>' +
+    cats.map(c => `<option>${c}</option>`).join('');
+  document.getElementById('e-client-wrap').style.display = type === 'income' ? 'block' : 'none';
+  document.getElementById('entryModalOverlay').classList.add('open');
+}
+
+function closeEntryModal() {
+  document.getElementById('entryModalOverlay').classList.remove('open');
+}
+
+function closeEntryModalOutside(e) {
+  if (e.target === document.getElementById('entryModalOverlay')) closeEntryModal();
+}
+
+function saveEntry() {
+  const date = document.getElementById('e-date').value;
+  const amount = parseFloat(document.getElementById('e-amount').value);
+  const desc = document.getElementById('e-desc').value.trim();
+  if (!date || !amount || !desc) return;
+  entries.push({
+    id: Date.now(), type: entryType, date, amount,
+    desc, cat: document.getElementById('e-cat').value,
+    client: document.getElementById('e-client').value,
+  });
+  savePnl(); closeEntryModal(); renderPnl();
+}
+
+function deleteEntry(id) {
+  if (!confirm('Delete this entry?')) return;
+  entries = entries.filter(e => e.id !== id);
+  savePnl(); renderPnl();
+}
+
+// ── TAB SWITCHING ─────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  try {
+    const isCrm = tab === 'crm';
+    document.getElementById('tab-crm').classList.toggle('active', isCrm);
+    document.getElementById('tab-pnl').classList.toggle('active', !isCrm);
+    document.getElementById('statsBar').style.display = isCrm ? 'grid' : 'none';
+    document.getElementById('crmMain').style.display = isCrm ? 'block' : 'none';
+    document.getElementById('pnlView').style.display = isCrm ? 'none' : 'block';
+    document.getElementById('mainAddBtn').style.display = isCrm ? 'flex' : 'none';
+    document.getElementById('logoSub').textContent = isCrm ? 'The Coliseum' : 'Financial Command Center';
+    if (!isCrm) renderPnl();
+  } catch(e) { console.error('switchTab error:', e); }
+}
+
+// Init P&L month display safely
+try {
+  const md = document.getElementById('monthDisplay');
+  if (md) md.textContent = currentMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).toUpperCase();
+} catch(e) {}
+
+
+})();
+</script>
+
+<!-- LEGAL MODAL -->
+<div id="legalModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99999;overflow-y:auto;padding:32px 20px;">
+  <div style="max-width:640px;margin:0 auto;background:#0C0F1A;border:1px solid rgba(255,255,255,0.1);padding:36px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <div id="legalTitle" style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;color:#F0F4FF;"></div>
+      <button onclick="document.getElementById('legalModal').style.display='none'" style="background:none;border:none;color:#8892A0;font-size:1.2rem;cursor:pointer;">✕</button>
+    </div>
+    <div id="legalContent" style="font-size:0.84rem;color:#CCD6F6;line-height:1.85;"></div>
+  </div>
+</div>
+
+<script>
+var legalDocs = {
+  terms: {
+    title: 'Terms of Service',
+    content: '<p><strong style="color:#F0F4FF;">Last updated: April 2025</strong></p><br>' +
+      '<p><strong style="color:#F0F4FF;">1. Services</strong><br>Medlock Design Solutions provides custom website design, development, and maintenance services. By engaging our services you agree to these terms.</p><br>' +
+      '<p><strong style="color:#F0F4FF;">2. Payment</strong><br>A one-time setup fee is required before work begins. Monthly fees are due on the same date each month. Late payments beyond 14 days may result in service suspension with written notice.</p><br>' +
+      '<p><strong style="color:#F0F4FF;">3. Cancellation</strong><br>Either party may cancel with 30 days written notice. Setup fees are non-refundable once design work has begun. All website files will be delivered to the client within 7 days of cancellation.</p><br>' +
+      '<p><strong style="color:#F0F4FF;">4. Ownership</strong><br>Upon full payment of the setup fee, the client owns their website design. The client is responsible for ensuring they have rights to all content they provide.</p><br>' +
+      '<p><strong style="color:#F0F4FF;">5. Liability</strong><br>Medlock Design Solutions is not liable for indirect or consequential damages. Total liability shall not exceed fees paid in the prior 3 months.</p><br>' +
+      '<p><strong style="color:#F0F4FF;">6. Contact</strong><br>Questions? Email cmeds2001@gmail.com</p>'
+  },
+  privacy: {
+    title: 'Privacy Policy',
+    content: '<p><strong style="color:#F0F4FF;">Last updated: April 2025</strong></p><br>' +
+      '<p><strong style="color:#F0F4FF;">What We Collect</strong><br>When you submit our contact form, we collect your business name, email address, and any information you choose to provide. We do not collect payment information directly — payments are processed through third-party services.</p><br>' +
+      '<p><strong style="color:#F0F4FF;">How We Use It</strong><br>Your information is used solely to respond to your inquiry and deliver our services. We do not sell, trade, or share your personal information with third parties.</p><br>' +
+      '<p><strong style="color:#F0F4FF;">Cookies</strong><br>This website does not use tracking cookies. We do not use analytics tools that collect personal data.</p><br>' +
+      '<p><strong style="color:#F0F4FF;">Data Security</strong><br>We take reasonable measures to protect your information. Form submissions are sent directly to our email.</p><br>' +
+      '<p><strong style="color:#F0F4FF;">Contact</strong><br>Questions about your data? Email cmeds2001@gmail.com</p>'
+  }
+};
+
+function showLegal(type) {
+  var doc = legalDocs[type];
+  document.getElementById('legalTitle').textContent = doc.title;
+  document.getElementById('legalContent').innerHTML = doc.content;
+  document.getElementById('legalModal').style.display = 'block';
+  window.scrollTo(0,0);
+}
+</script>
+
+
+<script>
+(function(){
+'use strict';
+
+// ── 1. PARTICLE NETWORK ────────────────────────────────────────────────
+var canvas = document.getElementById('particleCanvas');
+var ctx = canvas.getContext('2d');
+var particles = [];
+var mouse = {x: null, y: null};
+
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+window.addEventListener('mousemove', function(e){ mouse.x=e.clientX; mouse.y=e.clientY; });
+
+function Particle(){
+  this.x = Math.random() * canvas.width;
+  this.y = Math.random() * canvas.height;
+  this.vx = (Math.random()-0.5)*0.4;
+  this.vy = (Math.random()-0.5)*0.4;
+  this.size = Math.random()*1.5+0.5;
+  this.opacity = Math.random()*0.4+0.1;
+}
+
+for(var i=0;i<80;i++) particles.push(new Particle());
+
+function drawParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(function(p,i){
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0||p.x>canvas.width) p.vx*=-1;
+    if(p.y<0||p.y>canvas.height) p.vy*=-1;
+
+    // Draw dot
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fillStyle='rgba(0,102,255,'+p.opacity+')';
+    ctx.fill();
+
+    // Connect nearby particles
+    particles.forEach(function(p2,j){
+      if(j<=i) return;
+      var dx=p.x-p2.x, dy=p.y-p2.y;
+      var dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<120){
+        ctx.beginPath();
+        ctx.moveTo(p.x,p.y);
+        ctx.lineTo(p2.x,p2.y);
+        ctx.strokeStyle='rgba(0,102,255,'+(0.12*(1-dist/120))+')';
+        ctx.lineWidth=0.5;
+        ctx.stroke();
+      }
+    });
+
+    // React to mouse
+    if(mouse.x){
+      var mdx=p.x-mouse.x, mdy=p.y-mouse.y;
+      var mdist=Math.sqrt(mdx*mdx+mdy*mdy);
+      if(mdist<150){
+        ctx.beginPath();
+        ctx.moveTo(p.x,p.y);
+        ctx.lineTo(mouse.x,mouse.y);
+        ctx.strokeStyle='rgba(0,102,255,'+(0.2*(1-mdist/150))+')';
+        ctx.lineWidth=0.5;
+        ctx.stroke();
+      }
+    }
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+
+// ── 2. GLITCH LOGO ─────────────────────────────────────────────────────
+var logo = document.getElementById('glitchLogo');
+if(logo){
+  logo.setAttribute('data-text', 'MEDLOCK');
+  function triggerGlitch(){
+    logo.classList.add('glitch-active');
+    setTimeout(function(){ logo.classList.remove('glitch-active'); }, 420);
+    setTimeout(triggerGlitch, 3000 + Math.random()*4000);
+  }
+  setTimeout(triggerGlitch, 1200);
+}
+
+// ── 3. TYPEWRITER HEADLINE ─────────────────────────────────────────────
+var cycles = [
+  {l1:'YOUR SITE.', l2:'THEIR', l3:'NIGHTMARE.'},
+  {l1:'YOUR BRAND.', l2:'THEIR', l3:'PROBLEM.'},
+  {l1:'YOUR MOVE.', l2:'THEIR', l3:'LOSS.'},
+  {l1:'YOUR SITE.', l2:'BUILT', l3:'DIFFERENT.'},
+];
+var cycleIdx = 0;
+var line1El = document.getElementById('line1');
+var line2El = document.getElementById('line2');
+var line3El = document.getElementById('line3');
+
+// Add cursor to line3
+var cursor = document.createElement('span');
+cursor.className = 'tw-cursor';
+if(line3El) line3El.appendChild(cursor);
+
+function typeText(el, text, speed, cb){
+  if(!el) return cb && cb();
+  el.textContent = '';
+  if(el === line3El) el.appendChild(cursor);
+  var i=0;
+  var t = setInterval(function(){
+    if(i<text.length){
+      if(el===line3El){
+        el.insertBefore(document.createTextNode(text[i]), cursor);
+      } else {
+        el.textContent += text[i];
+      }
+      i++;
+    } else {
+      clearInterval(t);
+      cb && cb();
+    }
+  }, speed);
+}
+
+function eraseText(el, speed, cb){
+  if(!el) return cb && cb();
+  var txt = el === line3El
+    ? el.textContent.replace('|','').trim()
+    : el.textContent;
+  var i = txt.length;
+  var t = setInterval(function(){
+    if(i>0){
+      if(el===line3El){
+        // Remove text nodes before cursor
+        var nodes = Array.from(el.childNodes).filter(function(n){ return n.nodeType===3; });
+        if(nodes.length) nodes[nodes.length-1].textContent = nodes[nodes.length-1].textContent.slice(0,-1);
+        if(!nodes.length || nodes[nodes.length-1].textContent==='') {
+          var empty = Array.from(el.childNodes).filter(function(n){ return n.nodeType===3 && n.textContent===''; });
+          empty.forEach(function(n){ el.removeChild(n); });
+        }
+      } else {
+        el.textContent = el.textContent.slice(0,-1);
+      }
+      i--;
+    } else {
+      clearInterval(t);
+      cb && cb();
+    }
+  }, speed);
+}
+
+function runCycle(){
+  var next = cycles[cycleIdx % cycles.length];
+  cycleIdx++;
+  // Only cycle lines 2 & 3, keep line 1 stable after first load
+  setTimeout(function(){
+    eraseText(line3El, 40, function(){
+      eraseText(line2El, 40, function(){
+        typeText(line2El, next.l2, 60, function(){
+          typeText(line3El, next.l3, 60, function(){
+            setTimeout(runCycle, 3200);
+          });
+        });
+      });
+    });
+  }, 3200);
+}
+
+// Initial load type
+window.addEventListener('load', function(){
+  var hero = document.querySelector('.hero-content');
+  if(hero) hero.classList.add('loaded');
+
+  if(line1El && line2El && line3El){
+    line1El.textContent = '';
+    line2El.textContent = '';
+    if(line3El) { while(line3El.firstChild && line3El.firstChild !== cursor) line3El.removeChild(line3El.firstChild); }
+    typeText(line1El, cycles[0].l1, 70, function(){
+      typeText(line2El, cycles[0].l2, 70, function(){
+        typeText(line3El, cycles[0].l3, 70, function(){
+          setTimeout(runCycle, 2800);
+        });
+      });
+    });
+  }
+});
+
+// ── 4. COUNTER SLAM ────────────────────────────────────────────────────
+function animateCounter(el){
+  var target = parseInt(el.getAttribute('data-target'));
+  var suffix = el.getAttribute('data-suffix') || '';
+  var suffix_span = el.querySelector('span');
+  var start = 0;
+  var duration = 1800;
+  var startTime = null;
+
+  function easeOut(t){ return 1 - Math.pow(1-t, 3); }
+
+  function step(timestamp){
+    if(!startTime) startTime = timestamp;
+    var progress = Math.min((timestamp-startTime)/duration, 1);
+    var current = Math.floor(easeOut(progress) * target);
+    var textNode = el.childNodes[0];
+    if(textNode && textNode.nodeType===3){
+      textNode.textContent = current.toLocaleString();
+    } else {
+      el.insertBefore(document.createTextNode(current.toLocaleString()), suffix_span);
+    }
+    if(progress < 1) requestAnimationFrame(step);
+    else {
+      var tn = el.childNodes[0];
+      if(tn && tn.nodeType===3) tn.textContent = target.toLocaleString();
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+// ── 5. SCROLL REVEAL ──────────────────────────────────────────────────
+function initReveal(){
+  var sections = document.querySelectorAll('section, .stat-card, .pillar, .step, .price-card, .perk-row');
+  sections.forEach(function(el){ el.classList.add('reveal'); });
+
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        // Trigger counter if it's a stat
+        var counters = entry.target.querySelectorAll('.counter');
+        counters.forEach(animateCounter);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.15});
+
+  sections.forEach(function(el){ observer.observe(el); });
+
+  // Also observe individual counters not inside observed sections
+  document.querySelectorAll('.counter').forEach(function(el){
+    observer.observe(el);
+  });
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initReveal);
+} else {
+  initReveal();
+}
+
+})();
+</script>
+
+</body>
+</html>
